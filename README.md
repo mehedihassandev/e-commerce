@@ -1,50 +1,121 @@
-# React + TypeScript + Vite
+# E-Commerce Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an e-commerce application built with React, TypeScript, and Vite. It includes a minimal setup to get React working with Vite, Hot Module Replacement (HMR), and ESLint rules.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Available Scripts](#available-scripts)
+- [ESLint Configuration](#eslint-configuration)
+- [Prettier Configuration](#prettier-configuration)
+- [TypeScript Configuration](#typescript-configuration)
+- [Vite Configuration](#vite-configuration)
+- [Recommended Extensions](#recommended-extensions)
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To get started with this project, follow these steps:
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone the repository:
+   ```sh
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd e-commerce
+   ```
+3. Install the dependencies:
+   ```sh
+   yarn install
+   ```
+4. Start the development server:
+   ```sh
+   yarn run dev
+   ```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Project Structure
+
+```plaintext
+.gitignore
+.prettierignore
+.prettierrc
+.vscode/
+    extensions.json
+    settings.json
+eslint.config.js
+index.html
+main.tsx
+package.json
+public/
+README.md
+src/
+    app/
+        App.tsx
+        components/
+            *.tsx
+            modals/
+                *.tsx
+        constant/
+            *.ts
+        helper/
+            *.ts
+        layout/
+            *.tsx
+            *.ts
+        model/
+            *.ts
+        navigation/
+            *.tsx
+        pages/
+            *.tsx
+        redux/
+            */.ts
+            */.tsx
+        utils/
+            */.ts
+            */.tsx
+        vite-env.d.ts
+    assets/
+      */
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Available Scripts
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+In the project directory, you can run:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the project for production.
+- `npm run lint`: Lints the project using ESLint.
+- `npm run fix`: Fixes linting issues using ESLint.
+- `npm run preview`: Previews the production build.
+
+## ESLint Configuration
+
+The ESLint configuration is defined in [`eslint.config.js`](./eslint.config.js). It includes rules for React, TypeScript, and Prettier integration.
+
+To expand the ESLint configuration for type-aware lint rules, update the `parserOptions` and replace `tseslint.configs.recommended` with `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`.
+
+## Prettier Configuration
+
+The Prettier configuration is defined in [`.prettierrc`](./.prettierrc). It includes settings for code formatting such as tab width, single quotes, and trailing commas.
+
+## TypeScript Configuration
+
+The TypeScript configuration is defined in [`tsconfig.app.json`](./tsconfig.app.json) and [`tsconfig.json`](./tsconfig.json). It includes compiler options and project references.
+
+## Vite Configuration
+
+The Vite configuration is defined in [`vite.config.ts`](./vite.config.ts). It includes settings for the development server and plugins.
+
+## Recommended Extensions
+
+The recommended extensions for Visual Studio Code are listed in [`.vscode/extensions.json`](./.vscode/extensions.json). These extensions include support for ESLint, Prettier, and TypeScript.
+
+## License
+
+This project is licensed under the MIT License.
