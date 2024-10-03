@@ -1,6 +1,0 @@
-# .estlintignore file
-dist
-build
-node_modules/
-.eslintrc.json
-libs/utils/src/lib/theme
