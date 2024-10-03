@@ -1,15 +1,15 @@
-import { Box, Button, Typography } from '@mui/material';
-import { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import { RouterConfig } from './navigation/RouterConfig';
+import { Layout } from './layout';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <Box>
-      <Typography variant="h1">{count}</Typography>
-      <Button onClick={() => setCount(count + 1)}>Increment</Button>
-      <Button onClick={() => setCount(count - 1)}>Decrement</Button>
-    </Box>
+    <BrowserRouter>
+      <Layout>
+        <RouterConfig />
+      </Layout>
+    </BrowserRouter>
   );
 }
 

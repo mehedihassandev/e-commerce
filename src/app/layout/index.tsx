@@ -1,5 +1,21 @@
-export const Layout = () => {
-  return <div>Layout</div>;
+import { FC, ReactNode } from 'react';
+import { Box } from '@mui/material';
+
+import { Footer } from './footer';
+import { Header } from './header';
+
+interface LayoutProps {
+  children: ReactNode;
+}
+
+export const Layout: FC<LayoutProps> = ({ children }) => {
+  return (
+    <>
+      <Header />
+      <Box sx={{ minHeight: '100vh', paddingTop: '74px' }}>{children}</Box>
+      <Footer />
+    </>
+  );
 };
 
 export default Layout;
