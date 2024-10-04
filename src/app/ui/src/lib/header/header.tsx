@@ -8,9 +8,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { createElement, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ContentWrapper from '../utils/content-wrapper/content-wrapper';
-import { iconHash } from '../utils/src/lib/icon-hash';
-import { menus } from './menus';
+import { menus } from '../../../../layout/menus';
+import { ContentWrapper, iconHash } from '../../../../utils/src';
 
 export function Header() {
   const theme = useTheme();

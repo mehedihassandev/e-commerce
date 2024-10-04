@@ -1,4 +1,4 @@
-import { IconHashType } from '../utils/src/lib/icon-hash';
+import { IconHashType } from '../utils/src';
 
 export interface IMenu {
   id: string;

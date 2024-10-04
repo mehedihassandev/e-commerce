@@ -2,8 +2,7 @@ import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './layout';
 import { RouterConfig } from './navigation/RouterConfig';
-import { NetworkDetector } from './utils/src/hooks/network-detector';
-import { NotificationProvider } from './utils/src/hooks/notification-hook';
+import { NetworkDetector, NotificationProvider } from './utils/src';
 import { ThemeProviderWrapper } from './utils/src/lib/theme';
 
 function App() {
