@@ -1,0 +1,199 @@
+.loader {
+  text-align: center;
+  max-width: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .sim-shape {
+    width: 4.4rem;
+    height: 5.65rem;
+    background-color: gray;
+    position: relative;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    z-index: -1;
+
+    .sim-shape2 {
+      width: 4.2rem;
+      height: 5.4rem;
+      background-color: #fff;
+      position: relative;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      top: 2px;
+      left: 0.1rem;
+
+      .sim__dot {
+        position: absolute;
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: gold;
+        border-radius: 50%;
+        top: 30%;
+        right: 25%;
+      }
+
+      .sim__box-wrapper {
+        overflow: hidden;
+        position: absolute;
+        top: 45%;
+        left: 15%;
+        z-index: 10;
+        border-radius: 8px;
+
+        .wrapper {
+          box-sizing: border-box;
+          display: grid;
+          grid-template-columns: [col] 1rem [col] 1rem [col] 1rem;
+          grid-template-rows: [row] auto [row] auto [row];
+          width: 3rem;
+          height: 35px;
+          border: 2px solid gold;
+          border-radius: 8px;
+
+          .box {
+            color: #fff;
+          }
+
+          .a {
+            border: 2px solid gold;
+            border-top: 0;
+            border-left: 0;
+          }
+
+          .b {
+            border: 2px solid gold;
+            border-right: 0;
+            border-top: 0;
+          }
+
+          .c {
+            border: 2px solid gold;
+            border-top: 0;
+            border-left: 0;
+            border-bottom: 0;
+          }
+
+          .d {
+            border: 2px solid gold;
+            border: 0;
+
+            grid-column: col 2;
+            grid-row: 1 / span 3;
+          }
+
+          .e {
+            border: 2px solid gold;
+            border-top: 0;
+            border-right: 0;
+            border-bottom: 0;
+          }
+
+          .f {
+            border: 2px solid gold;
+            border-left: 0;
+            border-bottom: 0;
+          }
+
+          .g {
+            border: 2px solid gold;
+            border-bottom: 0;
+            border-right: 0;
+          }
+        }
+      }
+
+      .water-effect {
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 100%;
+        height: 130%;
+        animation: stretch 5s ease-in-out infinite;
+      }
+
+      .water-effect .waves {
+        height: 100px;
+        background-color: dodgerblue;
+        animation: waves 2s ease-in-out infinite;
+      }
+
+      .water-effect .water {
+        height: calc(100% - 100px);
+        margin-top: -1px;
+        background-color: dodgerblue;
+      }
+
+      @keyframes waves {
+        0%,
+        100% {
+          clip-path: polygon(
+            0 8%,
+            7% 6%,
+            14% 5%,
+            21% 5%,
+            28% 6%,
+            34% 8%,
+            40% 12%,
+            46% 17%,
+            50% 20%,
+            54% 23%,
+            60% 25%,
+            66% 26%,
+            70% 26%,
+            77% 25%,
+            83% 23%,
+            89% 21%,
+            95% 19%,
+            100% 17%,
+            100% 100%,
+            0% 100%
+          );
+        }
+
+        50% {
+          clip-path: polygon(
+            0 15%,
+            9% 21%,
+            14% 23%,
+            18% 25%,
+            21% 26%,
+            30% 28%,
+            32% 28%,
+            40% 27%,
+            46% 26%,
+            52% 23%,
+            57% 19%,
+            62% 15%,
+            68% 11%,
+            73% 8%,
+            79% 6%,
+            86% 5%,
+            93% 5%,
+            100% 6%,
+            100% 100%,
+            0% 100%
+          );
+        }
+      }
+
+      @keyframes stretch {
+        0% {
+          bottom: -90%;
+        }
+
+        100% {
+          bottom: -50px;
+        }
+      }
+    }
+  }
+}
+
+.sim-shape,
+.sim-shape2,
+.sim-shape2::before {
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 40%, 70% 0%);
+  border-radius: 5px;
+}
