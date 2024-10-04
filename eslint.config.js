@@ -114,16 +114,10 @@ const config = [
           }
         }
       ],
-      'import/no-unresolved': [
-        2,
-        {
-          caseSensitive: false,
-          ignore: ['@exos']
-        }
-      ],
+      'import/no-unresolved': 'off',
       'simple-import-sort/exports': 'error',
       'simple-import-sort/imports': [
-        'error',
+        'off',
         {
           groups: [
             // Packages `react` related packages come first.

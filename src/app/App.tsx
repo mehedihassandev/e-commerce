@@ -1,15 +1,25 @@
-import { Box, Button, Typography } from '@mui/material';
-import { useState } from 'react';
+import { CssBaseline } from '@mui/material';
+import { BrowserRouter } from 'react-router-dom';
+import { Layout } from './layout';
+import { RouterConfig } from './navigation/RouterConfig';
+import { NetworkDetector } from './utils/src/hooks/network-detector';
+import { NotificationProvider } from './utils/src/hooks/notification-hook';
+import { ThemeProviderWrapper } from './utils/src/lib/theme';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <Box>
-      <Typography variant="h1">{count}</Typography>
-      <Button onClick={() => setCount(count + 1)}>Increment</Button>
-      <Button onClick={() => setCount(count - 1)}>Decrement</Button>
-    </Box>
+    <NetworkDetector>
+      <BrowserRouter>
+        <ThemeProviderWrapper>
+          <Layout>
+            <NotificationProvider>
+              <CssBaseline />
+              <RouterConfig />
+            </NotificationProvider>
+          </Layout>
+        </ThemeProviderWrapper>
+      </BrowserRouter>
+    </NetworkDetector>
   );
 }
 
