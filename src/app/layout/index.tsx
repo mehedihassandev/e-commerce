@@ -1,18 +1,15 @@
-import { FC, ReactNode } from 'react';
 import { Box } from '@mui/material';
+import { FC } from 'react';
+import { Outlet } from 'react-router-dom'; // Import Outlet
+import { Footer, Header } from '../ui/src';
 
-import { Footer } from './footer';
-import { Header } from './header';
-
-interface LayoutProps {
-  children: ReactNode;
-}
-
-export const Layout: FC<LayoutProps> = ({ children }) => {
+export const Layout: FC = () => {
   return (
     <>
       <Header />
-      <Box sx={{ minHeight: '100vh', paddingTop: '74px' }}>{children}</Box>
+      <Box sx={{ minHeight: '100vh', paddingTop: '74px' }}>
+        <Outlet /> {/* This renders the nested routes */}
+      </Box>
       <Footer />
     </>
   );
