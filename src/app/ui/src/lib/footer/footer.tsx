@@ -2,8 +2,8 @@ import { Box, Grid, IconButton, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { createElement } from 'react';
 import { Link } from 'react-router-dom';
+import { socialMedia } from '../../../../constant/footer-constant';
 import { menus } from '../../../../layout/menus';
-import { ISocialIcon } from '../../../../model/app';
 import { ContentWrapper, iconHash } from '../../../../utils/src';
 
 const FooterLink = styled(Link)(({ theme }) => ({
@@ -37,13 +37,6 @@ const SocialIcon = styled(IconButton)(({ theme }) => ({
 }));
 
 export const Footer = () => {
-  const socialMedia: ISocialIcon[] = [
-    { label: 'Facebook', icon: 'facebook' },
-    { label: 'Twitter', icon: 'twitter' },
-    { label: 'Instagram', icon: 'instagram' },
-    { label: 'LinkedIn', icon: 'linkedin' }
-  ];
-
   return (
     <ContentWrapper
       sx={{
