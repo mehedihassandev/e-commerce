@@ -9,15 +9,15 @@ export const menus: IMenu[] = [
     icon: 'home'
   },
   {
-    id: 'about',
-    linkTitle: 'About',
-    linkUrl: ROUTES.ABOUT,
-    icon: 'about'
+    id: 'popular',
+    linkTitle: 'Popular',
+    linkUrl: ROUTES.POPULAR,
+    icon: 'popular'
   },
   {
-    id: 'contact',
-    linkTitle: 'Contact',
-    linkUrl: ROUTES.CONTACT,
-    icon: 'contact'
+    id: 'offers',
+    linkTitle: 'Offers',
+    linkUrl: ROUTES.OFFERS,
+    icon: 'offer'
   }
 ];

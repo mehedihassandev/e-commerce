@@ -6,3 +6,8 @@ export interface IMenu {
   linkUrl: string;
   icon?: IconHashType;
 }
+
+export interface ISocialIcon {
+  label: string;
+  icon: IconHashType;
+}

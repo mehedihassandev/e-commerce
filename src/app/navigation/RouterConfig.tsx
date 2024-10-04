@@ -12,8 +12,8 @@ const Loader = (Component: FC) => (props: ComponentProps<typeof Component>) => (
 );
 
 const Home = Loader(lazy(() => import('../pages/home')));
-const About = Loader(lazy(() => import('../pages/about')));
-const Contact = Loader(lazy(() => import('../pages/contact')));
+const Popular = Loader(lazy(() => import('../pages/popular')));
+const Offer = Loader(lazy(() => import('../pages/offer')));
 
 export const RouterConfig = () => {
   const location = useLocation();
@@ -25,8 +25,8 @@ export const RouterConfig = () => {
     <Routes location={background || location}>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path={ROUTES.ABOUT} element={<About />} />
-        <Route path={ROUTES.CONTACT} element={<Contact />} />
+        <Route path={ROUTES.POPULAR} element={<Popular />} />
+        <Route path={ROUTES.OFFERS} element={<Offer />} />
       </Route>
     </Routes>
   );
