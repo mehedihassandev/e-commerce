@@ -1,47 +1,33 @@
-import { MouseEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
-import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
-import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { createElement, useState } from 'react';
+import { Link } from 'react-router-dom';
 
+import { Drawer, List, useTheme } from '@mui/material';
+import { iconHash } from '../utils/src/lib/icon-hash';
 import { menus } from './menus';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 export function Header() {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const theme = useTheme();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+  const handleOpenDrawer = () => {
+    setDrawerOpen(true);
   };
 
-  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleCloseDrawer = () => {
+    setDrawerOpen(false);
   };
 
   return (
     <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -66,38 +52,59 @@ export function Header() {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={handleOpenDrawer}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left'
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+            <Drawer
+              anchor="left"
+              open={drawerOpen}
+              onClose={handleCloseDrawer}
               sx={{ display: { xs: 'block', md: 'none' } }}
+              PaperProps={{ style: { width: '80%' } }}
             >
-              {menus.map((menu) => (
-                <MenuItem key={menu.id} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>
-                    {menu.linkTitle}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+              <Typography variant="h6" sx={{ p: 2, textAlign: 'center' }}>
+                LOGO
+              </Typography>
+              <List>
+                {menus.map((menu) => (
+                  <Link
+                    key={menu.id}
+                    to={menu.linkUrl}
+                    style={{ textDecoration: 'none' }}
+                    onClick={handleCloseDrawer}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 1,
+                        p: '5px 8px'
+                      }}
+                    >
+                      {menu.icon && (
+                        <Box sx={{ mr: 1, color: theme.palette.grey[800] }}>
+                          {createElement(iconHash[menu.icon])}
+                        </Box>
+                      )}
+                      <Typography
+                        sx={{
+                          pb: 0.5,
+                          fontSize: '1.1rem',
+                          color: 'black',
+                          textDecoration: 'none'
+                        }}
+                      >
+                        {menu.linkTitle}
+                      </Typography>
+                    </Box>
+                  </Link>
+                ))}
+              </List>
+            </Drawer>
           </Box>
 
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -132,38 +139,6 @@ export function Header() {
                 {menu.linkTitle}
               </Link>
             ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>
