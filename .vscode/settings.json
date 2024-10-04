@@ -1,7 +1,7 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always",
-    "source.organizeImports": "always"
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
   },
   "prettier.requireConfig": true,
   "eslint.format.enable": true,

@@ -1,15 +1,25 @@
+import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
-
-import { RouterConfig } from './navigation/RouterConfig';
 import { Layout } from './layout';
+import { RouterConfig } from './navigation/RouterConfig';
+import { NetworkDetector } from './utils/src/hooks/network-detector';
+import { NotificationProvider } from './utils/src/hooks/notification-hook';
+import { ThemeProviderWrapper } from './utils/src/lib/theme';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <RouterConfig />
-      </Layout>
-    </BrowserRouter>
+    <NetworkDetector>
+      <BrowserRouter>
+        <ThemeProviderWrapper>
+          <Layout>
+            <NotificationProvider>
+              <CssBaseline />
+              <RouterConfig />
+            </NotificationProvider>
+          </Layout>
+        </ThemeProviderWrapper>
+      </BrowserRouter>
+    </NetworkDetector>
   );
 }
 

@@ -3,6 +3,7 @@ import { Container, Grid, Stack, useTheme } from '@mui/material';
 
 export const Footer = () => {
   const theme = useTheme();
+
   return (
     <Stack
       sx={{
