@@ -1,14 +1,14 @@
+import { ShoppingCart } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Badge, Drawer, InputBase, List, useTheme } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { createElement, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import { Drawer, List, useTheme } from '@mui/material';
+import ContentWrapper from '../utils/content-wrapper/content-wrapper';
 import { iconHash } from '../utils/src/lib/icon-hash';
 import { menus } from './menus';
 
@@ -26,8 +26,14 @@ export function Header() {
 
   return (
     <AppBar position="fixed">
-      <Container maxWidth="xl">
+      <ContentWrapper
+        sx={{
+          backgroundColor: theme.palette.primary.main,
+          color: 'white'
+        }}
+      >
         <Toolbar disableGutters>
+          {/* Logo on the left */}
           <Typography
             variant="h6"
             noWrap
@@ -46,7 +52,51 @@ export function Header() {
             LOGO
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          {/* Search bar in the middle */}
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+            <InputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+              sx={{
+                color: 'black',
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: 1,
+                padding: '0 10px',
+                width: '100%',
+                maxWidth: '600px'
+              }}
+            />
+          </Box>
+
+          {/* Menu items on the right */}
+          <Box
+            sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}
+          >
+            {menus.map((menu) => (
+              <Link
+                key={menu.id}
+                to={menu.linkUrl}
+                style={{
+                  margin: '0 10px',
+                  color: 'white',
+                  display: 'block',
+                  textDecoration: 'none',
+                  fontSize: '1rem'
+                }}
+              >
+                {menu.linkTitle}
+              </Link>
+            ))}
+
+            <IconButton size="large" color="inherit">
+              <Badge badgeContent={4} color="default">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </Box>
+
+          {/* Drawer for mobile view */}
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -104,44 +154,8 @@ export function Header() {
               </List>
             </Drawer>
           </Box>
-
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none'
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {menus.map((menu) => (
-              <Link
-                key={menu.id}
-                to={menu.linkUrl}
-                style={{
-                  margin: '0 10px',
-                  color: 'white',
-                  display: 'block',
-                  textDecoration: 'none', // Add this to remove underline
-                  fontSize: '1rem'
-                }}
-              >
-                {menu.linkTitle}
-              </Link>
-            ))}
-          </Box>
         </Toolbar>
-      </Container>
+      </ContentWrapper>
     </AppBar>
   );
 }
