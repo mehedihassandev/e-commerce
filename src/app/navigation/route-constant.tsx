@@ -1,11 +1,11 @@
 export const ROUTES = {
   HOME: '/',
-  ABOUT: '/about',
-  CONTACT: '/contact'
+  POPULAR: '/popular',
+  OFFERS: '/offers'
 };
 
 export const LINKS = {
   HOME: '/',
-  ABOUT: '/about',
-  CONTACT: '/contact'
+  POPULAR: '/popular',
+  OFFERS: '/offers'
 };
