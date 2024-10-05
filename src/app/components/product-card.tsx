@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toggleWhitelist } from '../redux';
 import { RootState } from '../redux/store';
 
@@ -23,6 +24,7 @@ interface IProductCardProps {
 export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const isWhitelisted = useSelector((state: RootState) =>
     state.whitelistReducer.whitelistedProducts.includes(data.id)
@@ -34,6 +36,11 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
 
   const { name, price, image } = data;
 
+  const handleProductClick = () => {
+    // Navigate to the product details page using product id
+    navigate(`/product/${data.id}`);
+  };
+
   return (
     <Card
       sx={{
@@ -41,10 +48,12 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
         borderRadius: 1,
         overflow: 'hidden',
         position: 'relative',
+        cursor: 'pointer',
         '&:hover .favorite-icon': {
           opacity: 1
         }
       }}
+      onClick={handleProductClick}
     >
       <Box sx={{ position: 'relative' }}>
         <CardMedia component="img" height="340" image={image} alt={name} />

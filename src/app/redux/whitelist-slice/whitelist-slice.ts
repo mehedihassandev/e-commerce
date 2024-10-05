@@ -21,9 +21,12 @@ const whitelistSlice = createSlice({
       } else {
         state.whitelistedProducts.push(productId);
       }
+    },
+    resetWhitelist: (state) => {
+      state.whitelistedProducts = [];
     }
   }
 });
 
-export const { toggleWhitelist } = whitelistSlice.actions;
+export const { toggleWhitelist, resetWhitelist } = whitelistSlice.actions;
 export const whitelistReducer = whitelistSlice.reducer;

@@ -15,6 +15,10 @@ const Home = Loader(lazy(() => import('../pages/home')));
 const Popular = Loader(lazy(() => import('../pages/popular')));
 const Offer = Loader(lazy(() => import('../pages/offer')));
 
+const ProductDetails = Loader(
+  lazy(() => import('../components/product-details'))
+);
+
 export const RouterConfig = () => {
   const location = useLocation();
 
@@ -27,6 +31,7 @@ export const RouterConfig = () => {
         <Route index element={<Home />} />
         <Route path={ROUTES.POPULAR} element={<Popular />} />
         <Route path={ROUTES.OFFERS} element={<Offer />} />
+        <Route path={ROUTES.PRODUCT_DETAILS} element={<ProductDetails />} />
       </Route>
     </Routes>
   );
