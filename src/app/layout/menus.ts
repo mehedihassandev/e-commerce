@@ -1,5 +1,5 @@
-import { IMenu } from '../model/app';
 import { ROUTES } from '../navigation/route-constant';
+import { IMenu } from '../ui/src/lib/data-access/src';
 
 export const menus: IMenu[] = [
   {
