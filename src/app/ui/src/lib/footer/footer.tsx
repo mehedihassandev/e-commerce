@@ -63,7 +63,7 @@ export const Footer = () => {
                 aria-label={media.label}
                 rel="noopener noreferrer"
               >
-                {createElement(iconHash[media.icon])}
+                {createElement(iconHash[media.icon as keyof typeof iconHash])}
               </SocialIcon>
             ))}
           </Box>
