@@ -55,6 +55,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
     const uniqueId = getProductUniqueId(data.id.toString(), cartItems);
 
     const cartItem = {
+      quantity: 1,
       id: uniqueId,
       name: data.name,
       price: data.price,

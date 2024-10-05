@@ -5,7 +5,7 @@ import {
   removeFromCart,
   restCart,
   updateCartItem
-} from './cart/cart';
+} from './cart/cart-slice';
 import { productReducer } from './product-slice/product-slice';
 import {
   resetWhitelist,

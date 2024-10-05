@@ -42,7 +42,9 @@ const cartSlice = createSlice({
       return {
         ...state,
         cartItems: state.cartItems.map((cartItem) =>
-          cartItem.id === action.payload.id ? action.payload : cartItem
+          cartItem.id === action.payload.id
+            ? { ...cartItem, quantity: action.payload.quantity }
+            : cartItem
         )
       };
     },

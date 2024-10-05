@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { cartReducer } from './cart/cart';
+import { cartReducer } from './cart/cart-slice';
 import { productReducer } from './product-slice/product-slice';
 import { whitelistReducer } from './whitelist-slice/whitelist-slice';
 
