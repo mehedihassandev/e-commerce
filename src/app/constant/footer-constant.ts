@@ -1,4 +1,4 @@
-import { ISocialIcon } from '../model/app';
+import { ISocialIcon } from '../model/home';
 
 export const socialMedia: ISocialIcon[] = [
   { label: 'Facebook', icon: 'facebook' },
