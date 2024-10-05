@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface WhitelistState {
+interface IWhitelistState {
   whitelistedProducts: number[];
 }
 
-const initialState: WhitelistState = {
+const initialState: IWhitelistState = {
   whitelistedProducts: []
 };
 
