@@ -1,12 +1,14 @@
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useTheme } from '@mui/material';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import Skeleton from '@mui/material/Skeleton'; // Import Skeleton
-import Typography from '@mui/material/Typography';
+import { Favorite } from '@mui/icons-material';
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Skeleton,
+  Typography,
+  useTheme
+} from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -97,7 +99,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
               handleWhitelistToggle();
             }}
           >
-            <FavoriteIcon />
+            <Favorite />
           </IconButton>
         )}
       </Box>

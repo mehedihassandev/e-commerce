@@ -1,7 +1,7 @@
 import { Grid, Stack } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ProductCard from '../components/product-card';
+import { ProductCard } from '../components/product-card';
 import { data } from '../constant/product-constant';
 import { setProducts } from '../redux/product-slice/product-slice';
 import { RootState } from '../redux/store';
