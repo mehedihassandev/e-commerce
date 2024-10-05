@@ -1,9 +1,10 @@
-import { Favorite } from '@mui/icons-material';
+import { Favorite, ShoppingCart } from '@mui/icons-material';
 import {
   Box,
   Card,
   CardContent,
   CardMedia,
+  Grid,
   IconButton,
   Skeleton,
   Typography,
@@ -12,7 +13,8 @@ import {
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toggleWhitelist } from '../redux';
+import { getProductUniqueId } from '../helper/cart-helper';
+import { addToCart, toggleWhitelist } from '../redux';
 import { RootState } from '../redux/store';
 
 interface IProductCardProps {
@@ -34,6 +36,10 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
     state.whitelistReducer.whitelistedProducts.includes(data.id)
   );
 
+  const cartItems = useSelector(
+    (state: RootState) => state.cartReducer.cartItems
+  );
+
   const handleWhitelistToggle = () => {
     dispatch(toggleWhitelist(data.id));
   };
@@ -43,6 +49,18 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   const handleProductClick = () => {
     // Navigate to the product details page using product id
     navigate(`/product/${data.id}`);
+  };
+
+  const handleAddToCart = () => {
+    const uniqueId = getProductUniqueId(data.id.toString(), cartItems);
+
+    const cartItem = {
+      id: uniqueId,
+      name: data.name,
+      price: data.price,
+      image: data.image
+    };
+    dispatch(addToCart(cartItem));
   };
 
   useEffect(() => {
@@ -110,26 +128,47 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
             <Skeleton width="60%" />
           </>
         ) : (
-          <>
-            <Typography
-              sx={{
-                color: theme.palette.primary.main,
-                fontSize: '1.3rem',
-                pt: 1
-              }}
-            >
-              {name}
-            </Typography>
-            <Typography
-              sx={{
-                color: theme.palette.primary.main,
-                fontSize: '1rem',
-                pt: 1
-              }}
-            >
-              {price}
-            </Typography>
-          </>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Typography
+                sx={{
+                  color: 'black',
+                  fontWeight: 600,
+                  fontSize: 18,
+                  lineHeight: 1.5,
+                  pb: 0.3
+                }}
+              >
+                {name}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: theme.palette.primary.main }}
+              >
+                {price}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  alignItems: 'center',
+                  height: '100%'
+                }}
+              >
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddToCart();
+                  }}
+                  color="primary"
+                >
+                  <ShoppingCart />
+                </IconButton>
+              </Box>
+            </Grid>
+          </Grid>
         )}
       </CardContent>
     </Card>

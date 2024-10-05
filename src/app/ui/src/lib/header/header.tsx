@@ -12,14 +12,20 @@ import {
   useTheme
 } from '@mui/material';
 import { createElement, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { menus } from '../../../../layout/menus';
 import { LINKS } from '../../../../navigation/route-constant';
+import { RootState } from '../../../../redux/store';
 import { ContentWrapper, iconHash } from '../../../../utils/src';
 
-export function Header() {
+export const Header = () => {
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const cartItems = useSelector(
+    (state: RootState) => state.cartReducer.cartItems
+  );
 
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
@@ -33,8 +39,9 @@ export function Header() {
     <AppBar position="fixed">
       <ContentWrapper
         sx={{
-          backgroundColor: theme.palette.primary.main,
-          color: 'white'
+          backgroundColor: theme.palette.secondary.main,
+          color: 'white',
+          boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)'
         }}
       >
         <Toolbar disableGutters>
@@ -94,7 +101,7 @@ export function Header() {
             ))}
 
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={4} color="default">
+              <Badge badgeContent={cartItems.length} color="default">
                 <ShoppingCart />
               </Badge>
             </IconButton>
@@ -163,5 +170,5 @@ export function Header() {
       </ContentWrapper>
     </AppBar>
   );
-}
+};
 export default Header;

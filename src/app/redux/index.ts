@@ -1,3 +1,11 @@
+import {
+  addToCart,
+  cartReducer,
+  clearCart,
+  removeFromCart,
+  restCart,
+  updateCartItem
+} from './cart/cart';
 import { productReducer } from './product-slice/product-slice';
 import {
   resetWhitelist,
@@ -5,4 +13,15 @@ import {
   whitelistReducer
 } from './whitelist-slice/whitelist-slice';
 
-export { productReducer, resetWhitelist, toggleWhitelist, whitelistReducer };
+export {
+  addToCart,
+  cartReducer,
+  clearCart,
+  productReducer,
+  removeFromCart,
+  resetWhitelist,
+  restCart,
+  toggleWhitelist,
+  updateCartItem,
+  whitelistReducer
+};
