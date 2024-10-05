@@ -1,14 +1,20 @@
-import { ShoppingCart } from '@mui/icons-material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Badge, Drawer, InputBase, List, useTheme } from '@mui/material';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { Menu, ShoppingCart } from '@mui/icons-material';
+import {
+  AppBar,
+  Badge,
+  Box,
+  Drawer,
+  IconButton,
+  InputBase,
+  List,
+  Toolbar,
+  Typography,
+  useTheme
+} from '@mui/material';
 import { createElement, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { menus } from '../../../../layout/menus';
+import { LINKS } from '../../../../navigation/route-constant';
 import { ContentWrapper, iconHash } from '../../../../utils/src';
 
 export function Header() {
@@ -36,8 +42,8 @@ export function Header() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href=""
+            component={Link}
+            to={LINKS.HOME}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -104,7 +110,7 @@ export function Header() {
               onClick={handleOpenDrawer}
               color="inherit"
             >
-              <MenuIcon />
+              <Menu />
             </IconButton>
             <Drawer
               anchor="left"
