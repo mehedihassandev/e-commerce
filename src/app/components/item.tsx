@@ -1,14 +1,33 @@
-import { Delete, Favorite } from '@mui/icons-material';
+import { Delete, Favorite, Remove } from '@mui/icons-material';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { FC } from 'react';
-import { ICartItem } from '../model/cart';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { IProduct } from '../model/product';
+import { RootState } from '../redux/store';
 
 interface IItemProps {
-  item: ICartItem;
-  handleRemoveFromCart: (itemId: string) => void;
+  item: IProduct;
+  handleRemoveFromCart: (itemId: number) => void;
+  handleRemoveFromWhitelist: (itemId: number) => void;
+  handleAddToWhitelist: (product: IProduct) => void;
+  // handleAddToCart: (product: IProduct) => void;
 }
 
-export const Item: FC<IItemProps> = ({ item, handleRemoveFromCart }) => {
+export const Item: FC<IItemProps> = ({
+  item,
+  handleRemoveFromCart,
+  handleRemoveFromWhitelist,
+  handleAddToWhitelist
+  // handleAddToCart
+}) => {
+  const location = useLocation();
+
+  const cartItems = useSelector(
+    (state: RootState) => state.cartReducer.cartItems
+  );
+  const isInCart = cartItems.some((cartItem) => cartItem.id === item.id);
+
   return (
     <Grid
       container
@@ -69,15 +88,49 @@ export const Item: FC<IItemProps> = ({ item, handleRemoveFromCart }) => {
               alignItems: 'center'
             }}
           >
+            {/* {isInCart ? (
+              <Button
+                variant="outlined"
+                startIcon={<Delete />}
+                onClick={() => handleRemoveFromCart(item.id)}
+              >
+                Remove From Cart
+              </Button>
+            ) : (
+              <Button
+                variant="outlined"
+                startIcon={<AddShoppingCart />}
+                onClick={() => handleAddToCart(item)}
+              >
+                Add To Cart
+              </Button>
+            )} */}
+            {location.pathname === '/cart' && (
+              <>
+                <Button
+                  variant="outlined"
+                  startIcon={<Delete />}
+                  onClick={() => handleRemoveFromCart(item.id)}
+                >
+                  Remove From Cart
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  startIcon={<Favorite />}
+                  onClick={() => handleAddToWhitelist(item)}
+                >
+                  Add To Whitelist
+                </Button>
+              </>
+            )}
+
             <Button
               variant="outlined"
-              startIcon={<Delete />}
-              onClick={() => handleRemoveFromCart(item.id)}
+              startIcon={<Remove />}
+              onClick={() => handleRemoveFromWhitelist(item.id)}
             >
-              Remove From Cart
-            </Button>
-            <Button variant="outlined" startIcon={<Favorite />}>
-              Add To Whitelist
+              Remove From Whitelist
             </Button>
           </Box>
           <Typography variant="body1">{item.price}</Typography>

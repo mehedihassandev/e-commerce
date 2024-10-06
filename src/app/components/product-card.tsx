@@ -62,7 +62,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
 
     const cartItem = {
       quantity: 1,
-      id: uniqueId,
+      id: Number(uniqueId),
       name: name,
       price: price,
       image: image

@@ -22,15 +22,17 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        existingItem.id = `${id}-${existingItem.id}`;
+        existingItem.quantity += action.payload.quantity;
       }
 
       return {
         ...state,
-        cartItems: [...state.cartItems, action.payload]
+        cartItems: existingItem
+          ? state.cartItems
+          : [...state.cartItems, action.payload]
       };
     },
-    removeFromCart: (state, action: PayloadAction<{ cartItemId: string }>) => {
+    removeFromCart: (state, action: PayloadAction<{ cartItemId: number }>) => {
       const updatedCartItems = state.cartItems?.filter(
         (cartItem: ICartItem) => cartItem.id !== action.payload.cartItemId
       );
@@ -53,8 +55,7 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       return {
         ...state,
-        cartItems: [],
-        cartTotalAmount: 0
+        cartItems: []
       };
     }
   }

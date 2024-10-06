@@ -1,7 +1,14 @@
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { removeFromCart } from '../redux';
+import { getProductUniqueId } from '../helper/cart-helper';
+import { IProduct } from '../model/product';
+import {
+  addToCart,
+  addToWhitelist,
+  removeFromCart,
+  removeFromWhitelist
+} from '../redux';
 import { RootState } from '../redux/store';
 import { ContentWrapper } from '../utils/src';
 import Item from './item';
@@ -13,6 +20,10 @@ const Cart = () => {
 
   const cartItems = useSelector(
     (state: RootState) => state.cartReducer.cartItems
+  );
+
+  const whitelistItems = useSelector(
+    (state: RootState) => state.whitelistReducer.whitelistedProducts
   );
 
   const relatedProducts = useSelector((state: RootState) =>
@@ -33,8 +44,38 @@ const Cart = () => {
   const shipping = 10;
   const total = subTotal + shipping;
 
-  const handleRemoveFromCart = (itemId: string) => {
+  const handleRemoveFromCart = (itemId: number) => {
     dispatch(removeFromCart({ cartItemId: itemId }));
+  };
+
+  const handleRemoveFromWhitelist = (itemId: number) => {
+    dispatch(removeFromWhitelist({ whiteListItemId: itemId }));
+  };
+
+  const handleAddToWhitelist = (product: IProduct) => {
+    const uniqueId = getProductUniqueId(product.id.toString(), whitelistItems);
+
+    const whiteListItem = {
+      quantity: 1,
+      id: Number(uniqueId),
+      name: product.name,
+      price: product.price,
+      image: product.image
+    };
+    dispatch(addToWhitelist(whiteListItem));
+  };
+
+  const handleAddToCart = (product: IProduct) => {
+    const uniqueId = getProductUniqueId(id, cartItems);
+
+    const cartItem = {
+      quantity: 1,
+      id: Number(uniqueId),
+      name: product.name,
+      price: product.price,
+      image: product.image
+    };
+    dispatch(addToCart(cartItem));
   };
 
   return (
@@ -53,7 +94,13 @@ const Cart = () => {
           <Grid item xs={8}>
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
-                <Item item={item} handleRemoveFromCart={handleRemoveFromCart} />
+                <Item
+                  item={item}
+                  handleRemoveFromCart={handleRemoveFromCart}
+                  handleAddToWhitelist={handleAddToWhitelist}
+                  handleRemoveFromWhitelist={handleRemoveFromWhitelist}
+                  // handleAddToCart={handleAddToCart}
+                />
               ))
             ) : (
               <Box sx={{ textAlign: 'center' }}>No items in cart</Box>

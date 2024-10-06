@@ -23,16 +23,35 @@ const whitelistSlice = createSlice({
       if (!existingItem) {
         state.whitelistedProducts.push(action.payload);
       }
+
+      return {
+        ...state,
+        whitelistedProducts: state.whitelistedProducts
+      };
     },
-    removeFromWhitelist: (state, action: PayloadAction<number>) => {
-      state.whitelistedProducts = state.whitelistedProducts.filter(
-        (item) => item.id !== action.payload
+    removeFromWhitelist: (
+      state,
+      action: PayloadAction<{ whiteListItemId: number }>
+    ) => {
+      const updatedCartItems = state.whitelistedProducts?.filter(
+        (whiteListItem: IWhitelistItem) =>
+          whiteListItem.id !== action.payload.whiteListItemId
       );
+
+      return {
+        ...state,
+        whitelistedProducts: updatedCartItems
+      };
     },
     updateWhitelistItem: (state, action: PayloadAction<IWhitelistItem>) => {
       state.whitelistedProducts = state.whitelistedProducts.map((item) =>
         item.id === action.payload.id ? { ...item, ...action.payload } : item
       );
+
+      return {
+        ...state,
+        whitelistedProducts: state.whitelistedProducts
+      };
     },
     resetWhitelist: (state) => {
       state.whitelistedProducts = [];
@@ -51,6 +70,9 @@ const whitelistSlice = createSlice({
       } else {
         state.whitelistedProducts.push(product);
       }
+    },
+    clearWhitelist: (state) => {
+      state.whitelistedProducts = [];
     }
   }
 });
@@ -60,6 +82,7 @@ export const {
   removeFromWhitelist,
   updateWhitelistItem,
   resetWhitelist,
-  toggleWhitelist
+  toggleWhitelist,
+  clearWhitelist
 } = whitelistSlice.actions;
 export const whitelistReducer = whitelistSlice.reducer;
