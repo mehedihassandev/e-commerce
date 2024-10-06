@@ -35,13 +35,15 @@ const ProductDetails = () => {
 
     const cartItem = {
       quantity: 1,
-      id: uniqueId,
+      id: Number(uniqueId),
       name: product?.name || '',
       price: product?.price || '',
       image: product?.image || ''
     };
 
-    const existingItem = cartItems.find((cartItem) => cartItem.id === uniqueId);
+    const existingItem = cartItems.find(
+      (cartItem) => cartItem.id === Number(uniqueId)
+    );
 
     if (existingItem) {
       dispatch(
