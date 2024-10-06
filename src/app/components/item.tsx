@@ -1,32 +1,26 @@
-import { Delete, Favorite, Remove } from '@mui/icons-material';
+import { AddShoppingCart, Delete, Favorite, Remove } from '@mui/icons-material';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IProduct } from '../model/product';
-import { RootState } from '../redux/store';
+import { LINKS } from '../navigation/route-constant';
 
 interface IItemProps {
   item: IProduct;
   handleRemoveFromCart: (itemId: number) => void;
   handleRemoveFromWhitelist: (itemId: number) => void;
   handleAddToWhitelist: (product: IProduct) => void;
-  // handleAddToCart: (product: IProduct) => void;
+  handleAddToCart?: (product: IProduct) => void;
 }
 
 export const Item: FC<IItemProps> = ({
   item,
   handleRemoveFromCart,
   handleRemoveFromWhitelist,
-  handleAddToWhitelist
-  // handleAddToCart
+  handleAddToWhitelist,
+  handleAddToCart
 }) => {
   const location = useLocation();
-
-  const cartItems = useSelector(
-    (state: RootState) => state.cartReducer.cartItems
-  );
-  const isInCart = cartItems.some((cartItem) => cartItem.id === item.id);
 
   return (
     <Grid
@@ -88,15 +82,7 @@ export const Item: FC<IItemProps> = ({
               alignItems: 'center'
             }}
           >
-            {/* {isInCart ? (
-              <Button
-                variant="outlined"
-                startIcon={<Delete />}
-                onClick={() => handleRemoveFromCart(item.id)}
-              >
-                Remove From Cart
-              </Button>
-            ) : (
+            {location.pathname === LINKS.FAVORITE && handleAddToCart && (
               <Button
                 variant="outlined"
                 startIcon={<AddShoppingCart />}
@@ -104,7 +90,7 @@ export const Item: FC<IItemProps> = ({
               >
                 Add To Cart
               </Button>
-            )} */}
+            )}
             {location.pathname === '/cart' && (
               <>
                 <Button

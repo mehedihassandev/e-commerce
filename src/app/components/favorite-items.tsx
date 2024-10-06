@@ -91,7 +91,7 @@ const FavoriteItems = () => {
                   handleRemoveFromCart={handleRemoveFromCart}
                   handleAddToWhitelist={handleAddToWhitelist}
                   handleRemoveFromWhitelist={handleRemoveFromWhitelist}
-                  // handleAddToCart={handleAddToCart}
+                  handleAddToCart={handleAddToCart}
                 />
               ))
             ) : (

@@ -41,7 +41,7 @@ const Cart = () => {
     return acc + price * item.quantity;
   }, 0);
 
-  const shipping = 10;
+  const shipping = cartItems.length > 0 ? 10 : 0;
   const total = subTotal + shipping;
 
   const handleRemoveFromCart = (itemId: number) => {
