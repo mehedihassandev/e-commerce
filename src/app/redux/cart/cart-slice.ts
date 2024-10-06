@@ -30,12 +30,14 @@ const cartSlice = createSlice({
         cartItems: [...state.cartItems, action.payload]
       };
     },
-    removeFromCart: (state, action: PayloadAction<string>) => {
+    removeFromCart: (state, action: PayloadAction<{ cartItemId: string }>) => {
+      const updatedCartItems = state.cartItems?.filter(
+        (cartItem: ICartItem) => cartItem.id !== action.payload.cartItemId
+      );
+
       return {
         ...state,
-        cartItems: state.cartItems.filter(
-          (cartItem) => cartItem.id !== action.payload
-        )
+        cartItems: updatedCartItems
       };
     },
     updateCartItem: (state, action: PayloadAction<ICartItem>) => {
@@ -51,7 +53,8 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       return {
         ...state,
-        cartItems: []
+        cartItems: [],
+        cartTotalAmount: 0
       };
     }
   }

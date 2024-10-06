@@ -1,13 +1,15 @@
 import { Delete, Favorite } from '@mui/icons-material';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { removeFromCart } from '../redux';
 import { RootState } from '../redux/store';
 import { ContentWrapper } from '../utils/src';
 import ProductCard from './product-card';
 
 const Cart = () => {
   const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch();
 
   const cartItems = useSelector(
     (state: RootState) => state.cartReducer.cartItems
@@ -24,8 +26,11 @@ const Cart = () => {
   }, 0);
 
   const shipping = 10;
-
   const total = subTotal + shipping;
+
+  const handleRemoveFromCart = (itemId: string) => {
+    dispatch(removeFromCart({ cartItemId: itemId }));
+  };
 
   return (
     <ContentWrapper
@@ -106,7 +111,11 @@ const Cart = () => {
                           alignItems: 'center'
                         }}
                       >
-                        <Button variant="outlined" startIcon={<Delete />}>
+                        <Button
+                          variant="outlined"
+                          startIcon={<Delete />}
+                          onClick={() => handleRemoveFromCart(item.id)}
+                        >
                           Remove From Cart
                         </Button>
                         <Button variant="outlined" startIcon={<Favorite />}>
