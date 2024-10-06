@@ -29,7 +29,9 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   const [loading, setLoading] = useState(true);
 
   const isWhitelisted = useSelector((state: RootState) =>
-    state.whitelistReducer.whitelistedProducts.includes(Number(data.id))
+    state.whitelistReducer.whitelistedProducts.some(
+      (item) => item.id === data.id
+    )
   );
 
   const cartItems = useSelector(
@@ -37,7 +39,15 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   );
 
   const handleWhitelistToggle = () => {
-    dispatch(toggleWhitelist(Number(data.id)));
+    const product = {
+      id: data.id,
+      name: data.name,
+      image: data.image,
+      price: data.price,
+      quantity: data.quantity || 1
+    };
+
+    dispatch(toggleWhitelist(product));
   };
 
   const { id, name, price, image } = data;
