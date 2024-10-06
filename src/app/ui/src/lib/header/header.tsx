@@ -100,7 +100,12 @@ export const Header = () => {
               </Link>
             ))}
 
-            <IconButton size="large" color="inherit">
+            <IconButton
+              size="large"
+              color="inherit"
+              component={Link}
+              to={LINKS.CART}
+            >
               <Badge badgeContent={cartItems.length} color="default">
                 <ShoppingCart />
               </Badge>

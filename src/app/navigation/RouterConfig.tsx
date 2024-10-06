@@ -19,6 +19,8 @@ const ProductDetails = Loader(
   lazy(() => import('../components/product-details'))
 );
 
+const CartDetails = Loader(lazy(() => import('../components/cart-details')));
+
 export const RouterConfig = () => {
   const location = useLocation();
 
@@ -32,6 +34,7 @@ export const RouterConfig = () => {
         <Route path={ROUTES.POPULAR} element={<Popular />} />
         <Route path={ROUTES.OFFERS} element={<Offer />} />
         <Route path={ROUTES.PRODUCT_DETAILS} element={<ProductDetails />} />
+        <Route path={ROUTES.CART} element={<CartDetails />} />
       </Route>
     </Routes>
   );
