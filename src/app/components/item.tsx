@@ -1,26 +1,30 @@
-import { AddShoppingCart, Delete, Favorite, Remove } from '@mui/icons-material';
+import { AddShoppingCart, Delete } from '@mui/icons-material';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IProduct } from '../model/product';
 import { LINKS } from '../navigation/route-constant';
+import { RootState } from '../redux/store';
 
 interface IItemProps {
   item: IProduct;
   handleRemoveFromCart: (itemId: number) => void;
-  handleRemoveFromWhitelist: (itemId: number) => void;
-  handleAddToWhitelist: (product: IProduct) => void;
   handleAddToCart?: (product: IProduct) => void;
+  handleWhitelistToggle?: (product: IProduct) => void;
 }
 
 export const Item: FC<IItemProps> = ({
   item,
   handleRemoveFromCart,
-  handleRemoveFromWhitelist,
-  handleAddToWhitelist,
-  handleAddToCart
+  handleAddToCart,
+  handleWhitelistToggle
 }) => {
   const location = useLocation();
+
+  const whitelistItems = useSelector(
+    (state: RootState) => state.whitelistReducer.whitelistedProducts
+  );
 
   return (
     <Grid
@@ -92,31 +96,27 @@ export const Item: FC<IItemProps> = ({
               </Button>
             )}
             {location.pathname === '/cart' && (
-              <>
-                <Button
-                  variant="outlined"
-                  startIcon={<Delete />}
-                  onClick={() => handleRemoveFromCart(item.id)}
-                >
-                  Remove From Cart
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  startIcon={<Favorite />}
-                  onClick={() => handleAddToWhitelist(item)}
-                >
-                  Add To Whitelist
-                </Button>
-              </>
+              <Button
+                variant="outlined"
+                startIcon={<Delete />}
+                onClick={() => handleRemoveFromCart(item.id)}
+              >
+                Remove From Cart
+              </Button>
             )}
 
             <Button
               variant="outlined"
-              startIcon={<Remove />}
-              onClick={() => handleRemoveFromWhitelist(item.id)}
+              startIcon={<Delete />}
+              onClick={() =>
+                handleWhitelistToggle && handleWhitelistToggle(item)
+              }
             >
-              Remove From Whitelist
+              {whitelistItems.find(
+                (whitelistItem) => whitelistItem.id === item.id
+              )
+                ? 'Remove From Whitelist'
+                : 'Add To Whitelist'}
             </Button>
           </Box>
           <Typography variant="body1">{item.price}</Typography>

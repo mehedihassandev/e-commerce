@@ -23,11 +23,6 @@ const whitelistSlice = createSlice({
       if (!existingItem) {
         state.whitelistedProducts.push(action.payload);
       }
-
-      return {
-        ...state,
-        whitelistedProducts: state.whitelistedProducts
-      };
     },
     removeFromWhitelist: (
       state,

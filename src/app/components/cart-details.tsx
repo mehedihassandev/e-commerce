@@ -3,12 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProductUniqueId } from '../helper/cart-helper';
 import { IProduct } from '../model/product';
-import {
-  addToCart,
-  addToWhitelist,
-  removeFromCart,
-  removeFromWhitelist
-} from '../redux';
+import { addToCart, removeFromCart, toggleWhitelist } from '../redux';
 import { RootState } from '../redux/store';
 import { ContentWrapper } from '../utils/src';
 import Item from './item';
@@ -48,23 +43,6 @@ const Cart = () => {
     dispatch(removeFromCart({ cartItemId: itemId }));
   };
 
-  const handleRemoveFromWhitelist = (itemId: number) => {
-    dispatch(removeFromWhitelist({ whiteListItemId: itemId }));
-  };
-
-  const handleAddToWhitelist = (product: IProduct) => {
-    const uniqueId = getProductUniqueId(product.id.toString(), whitelistItems);
-
-    const whiteListItem = {
-      quantity: 1,
-      id: Number(uniqueId),
-      name: product.name,
-      price: product.price,
-      image: product.image
-    };
-    dispatch(addToWhitelist(whiteListItem));
-  };
-
   const handleAddToCart = (product: IProduct) => {
     const uniqueId = getProductUniqueId(id, cartItems);
 
@@ -76,6 +54,18 @@ const Cart = () => {
       image: product.image
     };
     dispatch(addToCart(cartItem));
+  };
+
+  const handleWhitelistToggle = (product: IProduct) => {
+    const item = {
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price: product.price,
+      quantity: product.quantity || 1
+    };
+
+    dispatch(toggleWhitelist(item));
   };
 
   return (
@@ -97,8 +87,7 @@ const Cart = () => {
                 <Item
                   item={item}
                   handleRemoveFromCart={handleRemoveFromCart}
-                  handleAddToWhitelist={handleAddToWhitelist}
-                  handleRemoveFromWhitelist={handleRemoveFromWhitelist}
+                  handleWhitelistToggle={handleWhitelistToggle}
                   // handleAddToCart={handleAddToCart}
                 />
               ))
