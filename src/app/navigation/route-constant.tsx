@@ -3,7 +3,8 @@ export const ROUTES = {
   POPULAR: '/popular',
   OFFERS: '/offers',
   PRODUCT_DETAILS: '/product/:id',
-  CART: '/cart'
+  CART: '/cart',
+  FAVORITE: '/favorite'
 };
 
 export const LINKS = {
@@ -11,5 +12,6 @@ export const LINKS = {
   POPULAR: '/popular',
   OFFERS: '/offers',
   PRODUCT_DETAILS: '/product/:id',
-  CART: '/cart'
+  CART: '/cart',
+  FAVORITE: '/favorite'
 };

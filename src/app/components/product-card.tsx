@@ -14,16 +14,12 @@ import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getProductUniqueId } from '../helper/cart-helper';
+import { IProduct } from '../model/product';
 import { addToCart, toggleWhitelist } from '../redux';
 import { RootState } from '../redux/store';
 
 interface IProductCardProps {
-  data: {
-    id: number;
-    name: string;
-    image: string;
-    price: string;
-  };
+  data: IProduct;
 }
 
 export const ProductCard: FC<IProductCardProps> = ({ data }) => {
@@ -33,7 +29,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   const [loading, setLoading] = useState(true);
 
   const isWhitelisted = useSelector((state: RootState) =>
-    state.whitelistReducer.whitelistedProducts.includes(data.id)
+    state.whitelistReducer.whitelistedProducts.includes(Number(data.id))
   );
 
   const cartItems = useSelector(
@@ -41,25 +37,25 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   );
 
   const handleWhitelistToggle = () => {
-    dispatch(toggleWhitelist(data.id));
+    dispatch(toggleWhitelist(Number(data.id)));
   };
 
-  const { name, price, image } = data;
+  const { id, name, price, image } = data;
 
   const handleProductClick = () => {
     // Navigate to the product details page using product id
-    navigate(`/product/${data.id}`);
+    navigate(`/product/${id}`);
   };
 
   const handleAddToCart = () => {
-    const uniqueId = getProductUniqueId(data.id.toString(), cartItems);
+    const uniqueId = getProductUniqueId(id.toString(), cartItems);
 
     const cartItem = {
       quantity: 1,
       id: uniqueId,
-      name: data.name,
-      price: data.price,
-      image: data.image
+      name: name,
+      price: price,
+      image: image
     };
     dispatch(addToCart(cartItem));
   };

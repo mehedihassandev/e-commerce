@@ -1,4 +1,4 @@
-import { Menu, ShoppingCart } from '@mui/icons-material';
+import { Favorite, Menu, ShoppingCart } from '@mui/icons-material';
 import {
   AppBar,
   Badge,
@@ -25,6 +25,10 @@ export const Header = () => {
 
   const cartItems = useSelector(
     (state: RootState) => state.cartReducer.cartItems
+  );
+
+  const whitelistItems = useSelector(
+    (state: RootState) => state.whitelistReducer.whitelistedProducts
   );
 
   const handleOpenDrawer = () => {
@@ -108,6 +112,16 @@ export const Header = () => {
             >
               <Badge badgeContent={cartItems.length} color="default">
                 <ShoppingCart />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              color="inherit"
+              component={Link}
+              to={LINKS.FAVORITE}
+            >
+              <Badge badgeContent={whitelistItems.length} color="default">
+                <Favorite />
               </Badge>
             </IconButton>
           </Box>
