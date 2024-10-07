@@ -2,7 +2,7 @@ import { Box, Grid, IconButton, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { createElement } from 'react';
 import { Link } from 'react-router-dom';
-import { socialMedia } from '../../../../constant/footer-constant';
+import { socialMedia } from '../../../../constants/footer-constant';
 import { menus } from '../../../../layout/menus';
 import { ContentWrapper, iconHash } from '../../../../utils/src';
 

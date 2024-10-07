@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { data } from '../../constant/product-constant';
+import { data } from '../../constants/product-constant';
 import { setProducts } from '../../redux/product-slice/product-slice';
 import { ContentWrapper } from '../../utils/src';
 import Hero from './hero';

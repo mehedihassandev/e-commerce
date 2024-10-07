@@ -12,7 +12,14 @@ export const Hero = () => {
     >
       {/* Left Content */}
       <Box sx={{ maxWidth: '50%' }}>
-        <Typography variant="h3" sx={{ fontWeight: 'bold', lineHeight: 1.3 }}>
+        <Typography
+          variant="h3"
+          sx={{
+            fontWeight: 'bold',
+            lineHeight: 1.3,
+            textTransform: 'capitalize'
+          }}
+        >
           Discover the Best Deals on Electronics Today!
         </Typography>
         <Typography variant="body1" sx={{ mt: 2, mb: 8 }}>

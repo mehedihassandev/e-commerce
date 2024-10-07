@@ -16,7 +16,7 @@ export const ContentWrapper = ({
     <Box
       sx={{
         bgcolor: 'white',
-        padding: '2px 150px',
+        padding: '2px 250px',
         ...style,
         ...sx
       }}

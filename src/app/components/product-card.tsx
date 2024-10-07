@@ -89,7 +89,14 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
         cursor: 'pointer',
         '&:hover .favorite-icon': {
           opacity: 1
-        }
+        },
+        border: isWhitelisted
+          ? `1px solid ${theme.palette.primary.main}`
+          : `1px solid ${theme.palette.grey[300]}`,
+        minHeight: 500,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
       }}
       onClick={handleProductClick}
     >
