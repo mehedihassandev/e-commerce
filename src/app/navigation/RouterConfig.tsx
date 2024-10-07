@@ -11,7 +11,7 @@ const Loader = (Component: FC) => (props: ComponentProps<typeof Component>) => (
   </Suspense>
 );
 
-const Home = Loader(lazy(() => import('../pages/home')));
+const Home = Loader(lazy(() => import('../pages/home/home')));
 const Popular = Loader(lazy(() => import('../pages/popular')));
 const Offer = Loader(lazy(() => import('../pages/offer')));
 

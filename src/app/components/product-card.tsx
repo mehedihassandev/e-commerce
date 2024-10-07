@@ -74,7 +74,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
     // Simulate loading delay
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
