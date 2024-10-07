@@ -115,7 +115,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
               right: 8,
               color: isWhitelisted
                 ? theme.palette.primary.main
-                : theme.palette.secondary.main,
+                : theme.palette.grey[500],
               opacity: isWhitelisted ? 1 : 0,
               transition: 'opacity 0.3s'
             }}

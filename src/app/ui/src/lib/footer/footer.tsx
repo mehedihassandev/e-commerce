@@ -42,7 +42,8 @@ export const Footer = () => {
       sx={{
         backgroundColor: '#f5f5f5',
         boxShadow: '0px -2px 10px rgba(0, 0, 0, 0.1)',
-        padding: '40px 150px'
+        padding: '40px 150px',
+        marginTop: '50px'
       }}
     >
       <Grid container>
