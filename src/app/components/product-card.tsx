@@ -93,7 +93,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
         border: isWhitelisted
           ? `1px solid ${theme.palette.primary.main}`
           : `1px solid ${theme.palette.grey[300]}`,
-        minHeight: 500,
+        minHeight: 450,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between'
