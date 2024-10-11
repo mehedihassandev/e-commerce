@@ -1,7 +1,7 @@
-export interface ICartItem {
+export interface IWhitelistItem {
   id: number;
   name: string;
-  price: string;
   image: string;
+  price: string;
   quantity: number;
 }

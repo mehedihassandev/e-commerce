@@ -14,16 +14,12 @@ import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getProductUniqueId } from '../helper/cart-helper';
+import { IProduct } from '../model/product';
 import { addToCart, toggleWhitelist } from '../redux';
 import { RootState } from '../redux/store';
 
 interface IProductCardProps {
-  data: {
-    id: number;
-    name: string;
-    image: string;
-    price: string;
-  };
+  data: IProduct;
 }
 
 export const ProductCard: FC<IProductCardProps> = ({ data }) => {
@@ -33,7 +29,9 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   const [loading, setLoading] = useState(true);
 
   const isWhitelisted = useSelector((state: RootState) =>
-    state.whitelistReducer.whitelistedProducts.includes(data.id)
+    state.whitelistReducer.whitelistedProducts.some(
+      (item) => item.id === data.id
+    )
   );
 
   const cartItems = useSelector(
@@ -41,25 +39,33 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   );
 
   const handleWhitelistToggle = () => {
-    dispatch(toggleWhitelist(data.id));
+    const product = {
+      id: data.id,
+      name: data.name,
+      image: data.image,
+      price: data.price,
+      quantity: data.quantity || 1
+    };
+
+    dispatch(toggleWhitelist(product));
   };
 
-  const { name, price, image } = data;
+  const { id, name, price, image } = data;
 
   const handleProductClick = () => {
     // Navigate to the product details page using product id
-    navigate(`/product/${data.id}`);
+    navigate(`/product/${id}`);
   };
 
   const handleAddToCart = () => {
-    const uniqueId = getProductUniqueId(data.id.toString(), cartItems);
+    const uniqueId = getProductUniqueId(id.toString(), cartItems);
 
     const cartItem = {
       quantity: 1,
-      id: uniqueId,
-      name: data.name,
-      price: data.price,
-      image: data.image
+      id: id,
+      name: name,
+      price: price,
+      image: image
     };
     dispatch(addToCart(cartItem));
   };
@@ -68,7 +74,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
     // Simulate loading delay
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -76,14 +82,21 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   return (
     <Card
       sx={{
-        boxShadow: 3,
-        borderRadius: 1,
+        boxShadow: 5,
+        borderRadius: 2,
         overflow: 'hidden',
         position: 'relative',
         cursor: 'pointer',
         '&:hover .favorite-icon': {
           opacity: 1
-        }
+        },
+        border: isWhitelisted
+          ? `1px solid ${theme.palette.primary.main}`
+          : `1px solid ${theme.palette.grey[300]}`,
+        minHeight: 450,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
       }}
       onClick={handleProductClick}
     >
@@ -109,7 +122,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
               right: 8,
               color: isWhitelisted
                 ? theme.palette.primary.main
-                : theme.palette.secondary.main,
+                : theme.palette.grey[500],
               opacity: isWhitelisted ? 1 : 0,
               transition: 'opacity 0.3s'
             }}
@@ -164,6 +177,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
                     handleAddToCart();
                   }}
                   color="primary"
+                  disabled={cartItems.some((item) => item.id === id)}
                 >
                   <ShoppingCart />
                 </IconButton>

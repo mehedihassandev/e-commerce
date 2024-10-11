@@ -11,12 +11,17 @@ const Loader = (Component: FC) => (props: ComponentProps<typeof Component>) => (
   </Suspense>
 );
 
-const Home = Loader(lazy(() => import('../pages/home')));
+const Home = Loader(lazy(() => import('../pages/home/home')));
 const Popular = Loader(lazy(() => import('../pages/popular')));
 const Offer = Loader(lazy(() => import('../pages/offer')));
 
 const ProductDetails = Loader(
   lazy(() => import('../components/product-details'))
+);
+const CartDetails = Loader(lazy(() => import('../components/cart-details')));
+
+const FavoriteItems = Loader(
+  lazy(() => import('../components/favorite-items'))
 );
 
 export const RouterConfig = () => {
@@ -32,6 +37,8 @@ export const RouterConfig = () => {
         <Route path={ROUTES.POPULAR} element={<Popular />} />
         <Route path={ROUTES.OFFERS} element={<Offer />} />
         <Route path={ROUTES.PRODUCT_DETAILS} element={<ProductDetails />} />
+        <Route path={ROUTES.CART} element={<CartDetails />} />
+        <Route path={ROUTES.FAVORITE} element={<FavoriteItems />} />
       </Route>
     </Routes>
   );

@@ -5,7 +5,7 @@ import '@mui/lab/themeAugmentation';
 import '@fontsource-variable/plus-jakarta-sans';
 
 const themeColors = {
-  primary: '#003F51',
+  primary: '#4b8106',
   secondary: '#6E759F',
   success: '#4caf50',
   warning: '#ffc107',

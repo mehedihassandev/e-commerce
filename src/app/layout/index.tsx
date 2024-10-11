@@ -8,7 +8,7 @@ export const Layout: FC = () => {
   return (
     <>
       <Header />
-      <Box sx={{ paddingY: '74px' }}>
+      <Box sx={{ paddingTop: '100px' }}>
         <Outlet /> {/* This renders the nested routes */}
       </Box>
       <Footer />

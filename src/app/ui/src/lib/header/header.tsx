@@ -1,8 +1,9 @@
-import { Menu, ShoppingCart } from '@mui/icons-material';
+import { ExpandMore, Favorite, Menu, ShoppingCart } from '@mui/icons-material';
 import {
   AppBar,
   Badge,
   Box,
+  Button,
   Drawer,
   IconButton,
   InputBase,
@@ -27,6 +28,10 @@ export const Header = () => {
     (state: RootState) => state.cartReducer.cartItems
   );
 
+  const whitelistItems = useSelector(
+    (state: RootState) => state.whitelistReducer.whitelistedProducts
+  );
+
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
   };
@@ -37,10 +42,40 @@ export const Header = () => {
 
   return (
     <AppBar position="fixed">
+      {/* Top green bar */}
+      <Box
+        sx={{
+          backgroundColor: theme.palette.primary.main,
+          color: 'white',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '2px 10px'
+        }}
+      >
+        {/* <Toolbar sx={{ justifyContent: 'space-between' }} > */}
+        <Typography>+1234567890</Typography>
+        <Typography variant="body2">Welcome To Our Online Store!</Typography>
+        <Box>
+          <Button
+            color="inherit"
+            sx={{ color: 'white', textTransform: 'none' }}
+          >
+            $ Currency <ExpandMore />
+          </Button>
+          <Button
+            color="inherit"
+            sx={{ color: 'white', textTransform: 'none' }}
+          >
+            English <ExpandMore />
+          </Button>
+        </Box>
+        {/* </Toolbar> */}
+      </Box>
       <ContentWrapper
         sx={{
-          backgroundColor: theme.palette.secondary.main,
-          color: 'white',
+          backgroundColor: 'white',
+          color: 'black',
           boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)'
         }}
       >
@@ -57,7 +92,7 @@ export const Header = () => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'black',
               textDecoration: 'none'
             }}
           >
@@ -65,7 +100,13 @@ export const Header = () => {
           </Typography>
 
           {/* Search bar in the middle */}
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
             <InputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
@@ -75,7 +116,8 @@ export const Header = () => {
                 borderRadius: 1,
                 padding: '0 10px',
                 width: '100%',
-                maxWidth: '600px'
+                maxWidth: '600px',
+                border: `1px solid ${theme.palette.grey[300]}`
               }}
             />
           </Box>
@@ -90,7 +132,7 @@ export const Header = () => {
                 to={menu.linkUrl}
                 style={{
                   margin: '0 10px',
-                  color: 'white',
+                  color: 'black',
                   display: 'block',
                   textDecoration: 'none',
                   fontSize: '1rem'
@@ -100,9 +142,48 @@ export const Header = () => {
               </Link>
             ))}
 
-            <IconButton size="large" color="inherit">
-              <Badge badgeContent={cartItems.length} color="default">
-                <ShoppingCart />
+            <IconButton
+              size="large"
+              color="inherit"
+              component={Link}
+              to={LINKS.CART}
+            >
+              <Badge
+                badgeContent={cartItems.length}
+                sx={{
+                  '& .MuiBadge-badge': {
+                    backgroundColor: theme.palette.primary.main,
+                    color: 'white'
+                  }
+                }}
+              >
+                <ShoppingCart
+                  sx={{
+                    color: theme.palette.primary.main
+                  }}
+                />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              color="inherit"
+              component={Link}
+              to={LINKS.FAVORITE}
+            >
+              <Badge
+                badgeContent={whitelistItems.length}
+                sx={{
+                  '& .MuiBadge-badge': {
+                    backgroundColor: theme.palette.primary.main,
+                    color: 'white'
+                  }
+                }}
+              >
+                <Favorite
+                  sx={{
+                    color: theme.palette.primary.main
+                  }}
+                />
               </Badge>
             </IconButton>
           </Box>
