@@ -120,9 +120,7 @@ const ProductDetails = () => {
                 lineHeight: 1.8
               }}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
-              temporibus, fugit delectus nemo similique voluptatum possimus
-              impedit! Beatae nesciunt, cum, illo obcaecati inventore
+              {product.description}
             </Typography>
             <Button
               variant="contained"
