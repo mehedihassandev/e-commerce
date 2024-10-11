@@ -7,6 +7,7 @@ import { DealOfTheDay } from './deal-of-the-day';
 import { DiscountOffer } from './discount-offer';
 import { Feature } from './feature';
 import { Hero } from './hero';
+import { SpecialProduct } from './special-product';
 import { Product } from './top-product';
 
 export const Home = () => {
@@ -17,16 +18,13 @@ export const Home = () => {
   }, [dispatch]);
 
   return (
-    <ContentWrapper
-      sx={{
-        backgroundColor: 'transparent'
-      }}
-    >
+    <ContentWrapper>
       <Hero />
       <Product />
       <Feature />
       <DealOfTheDay />
       <DiscountOffer />
+      <SpecialProduct />
     </ContentWrapper>
   );
 };
