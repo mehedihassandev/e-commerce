@@ -1,10 +1,11 @@
 import { AddShoppingCart, Delete } from '@mui/icons-material';
 import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IProduct } from '../model/product';
 import { LINKS } from '../navigation/route-constant';
+import { removeFromCart, updateCartItem } from '../redux';
 import { RootState } from '../redux/store';
 
 interface IItemProps {
@@ -21,6 +22,7 @@ export const Item: FC<IItemProps> = ({
   handleWhitelistToggle
 }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const whitelistItems = useSelector(
     (state: RootState) => state.whitelistReducer.whitelistedProducts
@@ -29,6 +31,40 @@ export const Item: FC<IItemProps> = ({
   const cartItems = useSelector(
     (state: RootState) => state.cartReducer.cartItems
   );
+
+  const handleDecrement = () => {
+    const updatedQuantity = (item.quantity ?? 0) - 1;
+    if (updatedQuantity >= 0) {
+      if (updatedQuantity === 0) {
+        dispatch(removeFromCart({ cartItemId: item.id }));
+      } else {
+        dispatch(
+          updateCartItem({
+            id: item.id,
+            quantity: updatedQuantity,
+            name: item.name,
+            price: item.price,
+            image: item.image
+          })
+        );
+      }
+    }
+  };
+
+  const handleIncrement = () => {
+    const updatedQuantity = (item.quantity ?? 0) + 1;
+    if (updatedQuantity >= 0) {
+      dispatch(
+        updateCartItem({
+          id: item.id,
+          quantity: updatedQuantity,
+          name: item.name,
+          price: item.price,
+          image: item.image
+        })
+      );
+    }
+  };
 
   return (
     <Grid
@@ -82,11 +118,11 @@ export const Item: FC<IItemProps> = ({
           >
             <Typography variant="h6">{item.name}</Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <IconButton onClick={() => {}} size="small">
+              <IconButton onClick={handleDecrement} size="small">
                 -
               </IconButton>
               <Typography variant="body1">{item.quantity}</Typography>
-              <IconButton onClick={() => {}} size="small">
+              <IconButton onClick={handleIncrement} size="small">
                 +
               </IconButton>
             </Box>
