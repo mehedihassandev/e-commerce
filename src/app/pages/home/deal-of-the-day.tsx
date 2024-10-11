@@ -16,7 +16,7 @@ export const DealOfTheDay = () => {
   useEffect(() => {
     if (products.length > 0) {
       const shuffled = shuffleArray([...products]);
-      setShuffledProducts(shuffled);
+      setShuffledProducts(shuffled.slice(0, 4));
     }
   }, [products]);
 
