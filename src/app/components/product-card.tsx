@@ -44,13 +44,14 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
       name: data.name,
       image: data.image,
       price: data.price,
+      discountPrice: data.discountPrice,
       quantity: data.quantity || 1
     };
 
     dispatch(toggleWhitelist(product));
   };
 
-  const { id, name, price, image } = data;
+  const { id, name, price, image, discountPrice } = data;
 
   const handleProductClick = () => {
     // Navigate to the product details page using product id
@@ -65,6 +66,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
       id: id,
       name: name,
       price: price,
+      discountPrice: discountPrice,
       image: image
     };
     dispatch(addToCart(cartItem));
@@ -155,12 +157,33 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
               >
                 {name}
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: theme.palette.primary.main }}
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: 2,
+                  alignItems: 'end',
+                  mt: 2
+                }}
               >
-                {price}
-              </Typography>
+                <Typography
+                  color="primary"
+                  sx={{
+                    fontSize: '1.2rem',
+                    fontWeight: 700
+                  }}
+                >
+                  $ {discountPrice}
+                </Typography>
+                <Typography
+                  color="gray"
+                  sx={{
+                    fontSize: '.75rem',
+                    textDecoration: 'line-through'
+                  }}
+                >
+                  $ {price}
+                </Typography>
+              </Box>
             </Grid>
             <Grid item xs={6}>
               <Box
