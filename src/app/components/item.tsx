@@ -26,6 +26,10 @@ export const Item: FC<IItemProps> = ({
     (state: RootState) => state.whitelistReducer.whitelistedProducts
   );
 
+  const cartItems = useSelector(
+    (state: RootState) => state.cartReducer.cartItems
+  );
+
   return (
     <Grid
       container
@@ -91,6 +95,7 @@ export const Item: FC<IItemProps> = ({
                 variant="outlined"
                 startIcon={<AddShoppingCart />}
                 onClick={() => handleAddToCart(item)}
+                disabled={cartItems.some((cartItem) => cartItem.id === item.id)}
               >
                 Add To Cart
               </Button>
