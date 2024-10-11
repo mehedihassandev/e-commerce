@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../components/product-card';
 import { getProductUniqueId } from '../helper/cart-helper';
-import { addToCart, updateCartItem } from '../redux';
+import { addToCart } from '../redux';
 import { RootState } from '../redux/store';
 import { ContentWrapper } from '../utils/src';
 
@@ -35,26 +35,26 @@ const ProductDetails = () => {
 
     const cartItem = {
       quantity: 1,
-      id: Number(uniqueId),
+      id: product?.id || 0,
       name: product?.name || '',
       price: product?.price || '',
       image: product?.image || ''
     };
 
-    const existingItem = cartItems.find(
-      (cartItem) => cartItem.id === Number(uniqueId)
-    );
+    // const existingItem = cartItems.find(
+    //   (cartItem) => cartItem.id === Number(uniqueId)
+    // );
 
-    if (existingItem) {
-      dispatch(
-        updateCartItem({
-          ...existingItem,
-          quantity: existingItem.quantity + 1
-        })
-      );
+    // if (existingItem) {
+    //   dispatch(
+    //     updateCartItem({
+    //       ...existingItem,
+    //       quantity: existingItem.quantity + 1
+    //     })
+    //   );
 
-      return;
-    }
+    //   return;
+    // }
 
     dispatch(addToCart(cartItem));
   };
@@ -128,6 +128,7 @@ const ProductDetails = () => {
               variant="contained"
               sx={{ mt: 8 }}
               onClick={handleAddToCart}
+              disabled={cartItems.some((item) => item.id === product.id)}
             >
               Add to Cart
             </Button>

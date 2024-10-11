@@ -62,7 +62,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
 
     const cartItem = {
       quantity: 1,
-      id: Number(uniqueId),
+      id: id,
       name: name,
       price: price,
       image: image
@@ -82,8 +82,8 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   return (
     <Card
       sx={{
-        boxShadow: 3,
-        borderRadius: 1,
+        boxShadow: 5,
+        borderRadius: 2,
         overflow: 'hidden',
         position: 'relative',
         cursor: 'pointer',
@@ -177,6 +177,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
                     handleAddToCart();
                   }}
                   color="primary"
+                  disabled={cartItems.some((item) => item.id === id)}
                 >
                   <ShoppingCart />
                 </IconButton>
