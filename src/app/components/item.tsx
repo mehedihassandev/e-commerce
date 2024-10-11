@@ -110,23 +110,27 @@ export const Item: FC<IItemProps> = ({
             gap: 0.5
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between'
-            }}
-          >
-            <Typography variant="h6">{item.name}</Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <IconButton onClick={handleDecrement} size="small">
-                -
-              </IconButton>
-              <Typography variant="body1">{item.quantity}</Typography>
-              <IconButton onClick={handleIncrement} size="small">
-                +
-              </IconButton>
+          {location.pathname === LINKS.CART ? (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Typography variant="h6">{item.name}</Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <IconButton onClick={handleDecrement} size="small">
+                  -
+                </IconButton>
+                <Typography variant="body1">{item.quantity}</Typography>
+                <IconButton onClick={handleIncrement} size="small">
+                  +
+                </IconButton>
+              </Box>
             </Box>
-          </Box>
+          ) : (
+            <Typography variant="h6">{item.name}</Typography>
+          )}
           <Typography variant="body2">Color: Black</Typography>
           <Typography variant="body2">Quantity: {item.quantity}</Typography>
         </Box>
