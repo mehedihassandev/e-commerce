@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { data } from '../../constants/product-constant';
 import { setProducts } from '../../redux/product-slice/product-slice';
 import { ContentWrapper } from '../../utils/src';
-import Feature from './feature';
+import { DealOfTheDay } from './deal-of-the-day';
+import { Feature } from './feature';
 import { Hero } from './hero';
 import { Product } from './top-product';
 
@@ -23,6 +24,7 @@ export const Home = () => {
       <Hero />
       <Product />
       <Feature />
+      <DealOfTheDay />
     </ContentWrapper>
   );
 };
