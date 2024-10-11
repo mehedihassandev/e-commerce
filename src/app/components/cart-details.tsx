@@ -111,7 +111,6 @@ const Cart = () => {
                 <Typography variant="h6">Order Summary</Typography>
                 <Box
                   sx={{
-                    mt: 2,
                     display: 'flex',
                     gap: 1,
                     flexDirection: 'column'

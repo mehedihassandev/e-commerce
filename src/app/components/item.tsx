@@ -1,5 +1,5 @@
 import { AddShoppingCart, Delete } from '@mui/icons-material';
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -37,7 +37,7 @@ export const Item: FC<IItemProps> = ({
       sx={{
         border: '1px solid #f0f0f0',
         backgroundColor: 'white',
-        p: 2,
+        pb: 2,
         borderRadius: 1,
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
         mb: 4
@@ -52,7 +52,8 @@ export const Item: FC<IItemProps> = ({
             marginRight: '8px',
             width: '100%',
             height: '100%',
-            objectFit: 'cover'
+            objectFit: 'cover',
+            borderRadius: '4px'
           }}
         />
       </Grid>
@@ -60,7 +61,10 @@ export const Item: FC<IItemProps> = ({
         item
         xs={9}
         sx={{
-          p: 2
+          p: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between'
         }}
       >
         <Box
@@ -70,9 +74,24 @@ export const Item: FC<IItemProps> = ({
             gap: 0.5
           }}
         >
-          <Typography variant="h6">{item.name}</Typography>
-          <Typography variant="body2">Product Descriptions</Typography>
-          <Typography variant="body2">Color</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between'
+            }}
+          >
+            <Typography variant="h6">{item.name}</Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <IconButton onClick={() => {}} size="small">
+                -
+              </IconButton>
+              <Typography variant="body1">{item.quantity}</Typography>
+              <IconButton onClick={() => {}} size="small">
+                +
+              </IconButton>
+            </Box>
+          </Box>
+          <Typography variant="body2">Color: Black</Typography>
           <Typography variant="body2">Quantity: {item.quantity}</Typography>
         </Box>
         <Box
