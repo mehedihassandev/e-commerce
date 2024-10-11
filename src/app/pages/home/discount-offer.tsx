@@ -10,16 +10,17 @@ import {
 const products = [
   {
     title: 'Summer',
-    subtitle: 'Fresh Fruit, Vegetables',
-    description: 'Up to 25% off Fruit',
+    subtitle: 'Camera, Accessories',
+    description: 'Up to 25% off cameras',
     image:
       'https://cdn.pixabay.com/photo/2014/10/31/10/00/camera-510524_1280.jpg'
   },
   {
     title: 'Summer',
-    subtitle: 'Fresh Fruit, Vegetables',
-    description: 'Up to 25% off Fruit',
-    image: 'https://cdn.pixabay.com/photo/2014/10/31/10/01/lens-510529_1280.jpg'
+    subtitle: 'Headphones, Speakers',
+    description: 'Up to 35% off headphones',
+    image:
+      'https://cdn.pixabay.com/photo/2020/09/23/20/27/headphones-5596987_1280.jpg'
   }
 ];
 
