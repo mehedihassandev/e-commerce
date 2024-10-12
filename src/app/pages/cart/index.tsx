@@ -1,9 +1,10 @@
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import Item from '../../components/item';
-import RelatedProduct from '../../components/related-product';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Item } from '../../components/item';
+import { RelatedProduct } from '../../components/related-product';
 import { IProduct } from '../../model/product';
+import { ROUTES } from '../../navigation/route-constant';
 import { removeFromCart, toggleWhitelist } from '../../redux';
 import { RootState } from '../../redux/store';
 import { ContentWrapper } from '../../utils/src';
@@ -11,6 +12,7 @@ import { ContentWrapper } from '../../utils/src';
 const Cart = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cartItems = useSelector(
     (state: RootState) => state.cartReducer.cartItems
@@ -151,6 +153,9 @@ const Cart = () => {
                   sx={{
                     mt: 2,
                     width: '100%'
+                  }}
+                  onClick={() => {
+                    navigate(ROUTES.CHECKOUT);
                   }}
                 >
                   Checkout
