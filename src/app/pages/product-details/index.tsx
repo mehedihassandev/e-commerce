@@ -16,11 +16,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import ProductCard from '../components/product-card';
-import { getProductUniqueId } from '../helper/cart-helper';
-import { addToCart, toggleWhitelist } from '../redux';
-import { RootState } from '../redux/store';
-import { ContentWrapper, RhfTextField } from '../utils/src';
+import ProductCard from '../../components/product-card';
+import { getProductUniqueId } from '../../helper/cart-helper';
+import { addToCart, toggleWhitelist } from '../../redux';
+import { RootState } from '../../redux/store';
+import { ContentWrapper, RhfTextField } from '../../utils/src';
 
 const ProductDetails = () => {
   const theme = useTheme();

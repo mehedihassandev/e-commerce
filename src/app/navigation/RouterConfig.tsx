@@ -15,14 +15,10 @@ const Home = Loader(lazy(() => import('../pages/home')));
 const Popular = Loader(lazy(() => import('../pages/popular')));
 const Offer = Loader(lazy(() => import('../pages/offer')));
 
-const ProductDetails = Loader(
-  lazy(() => import('../components/product-details'))
-);
-const CartDetails = Loader(lazy(() => import('../components/cart-details')));
+const ProductDetails = Loader(lazy(() => import('../pages/product-details')));
+const CartDetails = Loader(lazy(() => import('../pages/cart')));
 
-const FavoriteItems = Loader(
-  lazy(() => import('../components/favorite-items'))
-);
+const FavoriteItems = Loader(lazy(() => import('../pages/favorite-items')));
 const Checkout = Loader(lazy(() => import('../pages/checkout')));
 
 export const RouterConfig = () => {
