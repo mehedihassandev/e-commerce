@@ -32,12 +32,12 @@ const Cart = () => {
   );
 
   const subTotal = cartItems.reduce((acc, item) => {
-    const price = parseFloat(item.price.replace('$', '').trim());
+    const price = parseFloat(item.discountPrice.replace('$', '').trim());
 
     return acc + price * item.quantity;
   }, 0);
 
-  const shipping = cartItems.length > 0 ? 10 : 0;
+  const shipping = cartItems.length > 0 ? 60 : 0;
   const total = subTotal + shipping;
 
   const handleRemoveFromCart = (itemId: number) => {
