@@ -4,7 +4,8 @@ export const ROUTES = {
   OFFERS: '/offers',
   PRODUCT_DETAILS: '/product/:id',
   CART: '/cart',
-  FAVORITE: '/favorite'
+  FAVORITE: '/favorite',
+  CHECKOUT: '/checkout'
 };
 
 export const LINKS = {
@@ -13,5 +14,6 @@ export const LINKS = {
   OFFERS: '/offers',
   PRODUCT_DETAILS: '/product/:id',
   CART: '/cart',
-  FAVORITE: '/favorite'
+  FAVORITE: '/favorite',
+  CHECKOUT: '/checkout'
 };
