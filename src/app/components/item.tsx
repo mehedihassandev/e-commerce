@@ -44,6 +44,7 @@ export const Item: FC<IItemProps> = ({
             quantity: updatedQuantity,
             name: item.name,
             price: item.price,
+            discountPrice: item.discountPrice,
             image: item.image
           })
         );
@@ -60,6 +61,7 @@ export const Item: FC<IItemProps> = ({
           quantity: updatedQuantity,
           name: item.name,
           price: item.price,
+          discountPrice: item.discountPrice,
           image: item.image
         })
       );
@@ -183,7 +185,7 @@ export const Item: FC<IItemProps> = ({
                 : 'Add To Whitelist'}
             </Button>
           </Box>
-          <Typography variant="body1">{item.price}</Typography>
+          <Typography variant="body1">$ {item.price}</Typography>
         </Box>
       </Grid>
     </Grid>

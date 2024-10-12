@@ -1,13 +1,12 @@
 import { Box, Grid, Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProductUniqueId } from '../helper/cart-helper';
-import { IProduct } from '../model/product';
-import { addToCart, removeFromCart, toggleWhitelist } from '../redux';
-import { RootState } from '../redux/store';
-import { ContentWrapper } from '../utils/src';
-import Item from './item';
-import RelatedProduct from './related-product';
+import { Item } from '../../components/item';
+import { RelatedProduct } from '../../components/related-product';
+import { IProduct } from '../../model/product';
+import { removeFromCart, toggleWhitelist } from '../../redux';
+import { RootState } from '../../redux/store';
+import { ContentWrapper } from '../../utils/src';
 
 const FavoriteItems = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,18 +33,18 @@ const FavoriteItems = () => {
     dispatch(removeFromCart({ cartItemId: itemId }));
   };
 
-  const handleAddToCart = (product: IProduct) => {
-    const uniqueId = getProductUniqueId(product.id.toString(), cartItems);
+  // const handleAddToCart = (product: IProduct) => {
+  //   const uniqueId = getProductUniqueId(product.id.toString(), cartItems);
 
-    const cartItem = {
-      quantity: 1,
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image
-    };
-    dispatch(addToCart(cartItem));
-  };
+  //   const cartItem = {
+  //     quantity: 1,
+  //     id: product.id,
+  //     name: product.name,
+  //     price: product.price,
+  //     image: product.image
+  //   };
+  //   dispatch(addToCart(cartItem));
+  // };
 
   const handleWhitelistToggle = (product: IProduct) => {
     const item = {
@@ -53,6 +52,7 @@ const FavoriteItems = () => {
       name: product.name,
       image: product.image,
       price: product.price,
+      discountPrice: product.discountPrice,
       quantity: product.quantity || 1
     };
 
@@ -79,7 +79,7 @@ const FavoriteItems = () => {
                   key={item.id}
                   item={item}
                   handleRemoveFromCart={handleRemoveFromCart}
-                  handleAddToCart={handleAddToCart}
+                  // handleAddToCart={handleAddToCart}
                   handleWhitelistToggle={handleWhitelistToggle}
                 />
               ))

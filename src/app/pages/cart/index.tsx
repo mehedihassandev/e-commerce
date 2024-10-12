@@ -1,17 +1,18 @@
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getProductUniqueId } from '../helper/cart-helper';
-import { IProduct } from '../model/product';
-import { addToCart, removeFromCart, toggleWhitelist } from '../redux';
-import { RootState } from '../redux/store';
-import { ContentWrapper } from '../utils/src';
-import Item from './item';
-import RelatedProduct from './related-product';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Item } from '../../components/item';
+import { RelatedProduct } from '../../components/related-product';
+import { IProduct } from '../../model/product';
+import { ROUTES } from '../../navigation/route-constant';
+import { removeFromCart, toggleWhitelist } from '../../redux';
+import { RootState } from '../../redux/store';
+import { ContentWrapper } from '../../utils/src';
 
 const Cart = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cartItems = useSelector(
     (state: RootState) => state.cartReducer.cartItems
@@ -31,30 +32,30 @@ const Cart = () => {
   );
 
   const subTotal = cartItems.reduce((acc, item) => {
-    const price = parseFloat(item.price.replace('$', '').trim());
+    const price = parseFloat(item.discountPrice.replace('$', '').trim());
 
     return acc + price * item.quantity;
   }, 0);
 
-  const shipping = cartItems.length > 0 ? 10 : 0;
+  const shipping = cartItems.length > 0 ? 60 : 0;
   const total = subTotal + shipping;
 
   const handleRemoveFromCart = (itemId: number) => {
     dispatch(removeFromCart({ cartItemId: itemId }));
   };
 
-  const handleAddToCart = (product: IProduct) => {
-    const uniqueId = getProductUniqueId(id, cartItems);
+  // const handleAddToCart = (product: IProduct) => {
+  //   const uniqueId = getProductUniqueId(id, cartItems);
 
-    const cartItem = {
-      quantity: 1,
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image
-    };
-    dispatch(addToCart(cartItem));
-  };
+  //   const cartItem = {
+  //     quantity: 1,
+  //     id: product.id,
+  //     name: product.name,
+  //     price: product.price,
+  //     image: product.image
+  //   };
+  //   dispatch(addToCart(cartItem));
+  // };
 
   const handleWhitelistToggle = (product: IProduct) => {
     const item = {
@@ -62,6 +63,7 @@ const Cart = () => {
       name: product.name,
       image: product.image,
       price: product.price,
+      discountPrice: product.discountPrice,
       quantity: product.quantity || 1
     };
 
@@ -151,6 +153,9 @@ const Cart = () => {
                   sx={{
                     mt: 2,
                     width: '100%'
+                  }}
+                  onClick={() => {
+                    navigate(ROUTES.CHECKOUT);
                   }}
                 >
                   Checkout

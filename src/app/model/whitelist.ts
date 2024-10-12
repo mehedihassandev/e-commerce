@@ -3,5 +3,6 @@ export interface IWhitelistItem {
   name: string;
   image: string;
   price: string;
+  discountPrice: string;
   quantity: number;
 }
