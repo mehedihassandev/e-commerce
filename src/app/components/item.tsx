@@ -93,9 +93,10 @@ export const Item: FC<IItemProps> = ({
           style={{
             marginRight: '8px',
             width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            borderRadius: '4px'
+            height: '200px',
+            objectFit: 'contain',
+            borderRadius: '4px',
+            padding: '8px'
           }}
         />
       </Grid>
@@ -189,7 +190,7 @@ export const Item: FC<IItemProps> = ({
                 : 'Add To Whitelist'}
             </Button>
           </Box>
-          <Typography variant="body1">$ {item.price}</Typography>
+          <Typography variant="body1">$ {item.price.toFixed(2)}</Typography>
         </Box>
       </Grid>
     </Grid>

@@ -57,7 +57,7 @@ export const Home = () => {
     <ContentWrapper>
       {isLoading && <FullWidthLoader />}
       <Hero />
-      {data && <Product data={data} />}
+      {data && <Product data={data} isLoading={isLoading} />}
       <Feature />
       <DealOfTheDay />
       <DiscountOffer />

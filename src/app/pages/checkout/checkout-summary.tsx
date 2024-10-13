@@ -92,7 +92,7 @@ export const CheckoutSummary = () => {
                   fontWeight: 700
                 }}
               >
-                $ {item.price}
+                $ {item.price.toFixed(2)}
               </Typography>
             </CardContent>
           </Card>
@@ -107,7 +107,7 @@ export const CheckoutSummary = () => {
         }}
       >
         <Typography variant="body2">Subtotal</Typography>
-        <Typography variant="body2">$ {subTotal}</Typography>
+        <Typography variant="body2">$ {subTotal.toFixed(2)}</Typography>
       </Box>
       <Box
         sx={{
@@ -116,7 +116,7 @@ export const CheckoutSummary = () => {
         }}
       >
         <Typography variant="body2">Shipping</Typography>
-        <Typography variant="body2">$ {shipping}</Typography>
+        <Typography variant="body2">$ {shipping.toFixed(2)}</Typography>
       </Box>
       <Box
         sx={{
@@ -139,7 +139,7 @@ export const CheckoutSummary = () => {
             fontWeight: 700
           }}
         >
-          $ {total}
+          $ {total.toFixed(2)}
         </Typography>
       </Box>
 

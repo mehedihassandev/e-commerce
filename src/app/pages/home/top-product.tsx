@@ -4,9 +4,10 @@ import { IProduct } from '../../model/product';
 
 interface IProductProps {
   data: IProduct[];
+  isLoading?: boolean;
 }
 
-export const Product = ({ data }: IProductProps) => {
+export const Product = ({ data, isLoading }: IProductProps) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -21,11 +22,7 @@ export const Product = ({ data }: IProductProps) => {
           Top Product
         </Typography>
       </Grid>
-      {data?.map((product: IProduct) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-          <ProductCard data={product} />
-        </Grid>
-      ))}
+      <ProductCard data={data} isLoading={isLoading} />
     </Grid>
   );
 };

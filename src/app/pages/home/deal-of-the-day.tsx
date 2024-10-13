@@ -21,24 +21,22 @@ export const DealOfTheDay = () => {
   }, [products]);
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} my={6}>
       <Grid item xs={12}>
         <Typography
           sx={{
             fontSize: '1.7rem',
             fontWeight: 700,
             textAlign: 'center',
-            mb: 2
+            mb: 6
           }}
         >
           Deal Of The Day
         </Typography>
       </Grid>
-      {shuffledProducts.map((product) => (
-        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-          <ProductCard data={product} />
-        </Grid>
-      ))}
+      <Grid container spacing={2}>
+        <ProductCard data={shuffledProducts} />
+      </Grid>
     </Grid>
   );
 };

@@ -2,7 +2,7 @@ import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Item } from '../../components/item';
-import { RelatedProduct } from '../../components/related-product';
+import { ProductCard } from '../../components/product-card';
 import { IProduct } from '../../model/product';
 import { ROUTES } from '../../navigation/route-constant';
 import { removeFromCart, toggleWhitelist } from '../../redux';
@@ -25,10 +25,7 @@ const Cart = () => {
   const relatedProducts = useSelector((state: RootState) =>
     state.productReducer.products
       .filter((p) => p.id !== parseInt(id || '', 10))
-      .map((product) => ({
-        ...product,
-        quantity: 0 // Add a default quantity value
-      }))
+      .slice(0, 4)
   );
 
   const subTotal = cartItems.reduce((acc, item) => {
@@ -139,7 +136,9 @@ const Cart = () => {
                     }}
                   >
                     <Typography variant="body1">Shipping</Typography>
-                    <Typography variant="body1">$ {shipping}</Typography>
+                    <Typography variant="body1">
+                      $ {shipping.toFixed(2)}
+                    </Typography>
                   </Box>
                   <Box
                     sx={{
@@ -148,7 +147,9 @@ const Cart = () => {
                     }}
                   >
                     <Typography variant="body1">Total</Typography>
-                    <Typography variant="body1">$ {total}</Typography>
+                    <Typography variant="body1">
+                      $ {total.toFixed(2)}
+                    </Typography>
                   </Box>
                 </Box>
                 <Button
@@ -167,7 +168,12 @@ const Cart = () => {
             </Grid>
           </Grid>
         </Grid>
-        <RelatedProduct relatedProducts={relatedProducts} />
+        <Typography variant="h5" sx={{ mt: 8, mb: 4, fontWeight: 700 }}>
+          Related Products
+        </Typography>
+        <Grid container spacing={2}>
+          <ProductCard data={relatedProducts} />
+        </Grid>
       </Stack>
     </ContentWrapper>
   );

@@ -16,29 +16,27 @@ export const SpecialProduct = () => {
   useEffect(() => {
     if (products.length > 0) {
       const shuffled = shuffleArray([...products]);
-      setShuffledProducts(shuffled.slice(4, 8));
+      setShuffledProducts(shuffled.slice(4, 12));
     }
   }, [products]);
 
   return (
-    <Grid container spacing={3} mb={8}>
+    <Grid container spacing={3} my={8}>
       <Grid item xs={12}>
         <Typography
           sx={{
             fontSize: '1.7rem',
             fontWeight: 700,
             textAlign: 'center',
-            mb: 2
+            mb: 6
           }}
         >
           Special Products
         </Typography>
       </Grid>
-      {shuffledProducts.map((product) => (
-        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-          <ProductCard data={product} />
-        </Grid>
-      ))}
+      <Grid container spacing={2}>
+        <ProductCard data={shuffledProducts} />
+      </Grid>
     </Grid>
   );
 };

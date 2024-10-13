@@ -2,7 +2,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { IRequestParamsOptions } from './type';
 
 const API_URL = {
-  GET_PRODUCTS: 'https://fakestoreapi.com/products'
+  GET_PRODUCTS: 'https://fakestoreapi.com/products?'
 };
 
 export async function gerProduct<R = any, D = any>(
