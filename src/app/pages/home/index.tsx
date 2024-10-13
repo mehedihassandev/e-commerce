@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setProducts } from '../../redux/product-slice/product-slice';
-import { fetchProduct, Loader } from '../../ui/src';
+import { gerProduct, Loader } from '../../ui/src';
 import { ContentWrapper } from '../../utils/src';
 import { DealOfTheDay } from './deal-of-the-day';
 import { DiscountOffer } from './discount-offer';
@@ -38,7 +38,7 @@ export const Home = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['product', { quantity: 1 }],
     queryFn: () => {
-      return fetchProduct({
+      return gerProduct({
         api: axios,
         url: ''
       });

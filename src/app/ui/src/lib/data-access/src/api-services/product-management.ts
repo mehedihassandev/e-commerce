@@ -5,7 +5,7 @@ const API_URL = {
   GET_PRODUCTS: 'https://fakestoreapi.com/products'
 };
 
-export async function fetchProduct<R = any, D = any>(
+export async function gerProduct<R = any, D = any>(
   requestParamsOptions: IRequestParamsOptions<D>
 ): Promise<AxiosResponse<R>> {
   const { api, url, headers } = requestParamsOptions;
