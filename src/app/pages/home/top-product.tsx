@@ -1,13 +1,12 @@
 import { Grid, Typography } from '@mui/material';
-import { useSelector } from 'react-redux';
 import { ProductCard } from '../../components/product-card';
-import { RootState } from '../../redux/store';
+import { IProduct } from '../../model/product';
 
-export const Product = () => {
-  const products = useSelector(
-    (state: RootState) => state.productReducer.products
-  );
+interface IProductProps {
+  data: IProduct[];
+}
 
+export const Product = ({ data }: IProductProps) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -22,8 +21,8 @@ export const Product = () => {
           Top Product
         </Typography>
       </Grid>
-      {products?.map((product) => (
-        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+      {data?.map((product: IProduct) => (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
           <ProductCard data={product} />
         </Grid>
       ))}

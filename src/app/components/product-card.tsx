@@ -20,9 +20,11 @@ import { RootState } from '../redux/store';
 
 interface IProductCardProps {
   data: IProduct;
+  isLoaded?: boolean | undefined;
 }
 
 export const ProductCard: FC<IProductCardProps> = ({ data }) => {
+  console.log(data);
   const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,17 +43,19 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   const handleWhitelistToggle = () => {
     const product = {
       id: data.id,
-      name: data.name,
-      image: data.image,
+      title: data.title,
       price: data.price,
-      discountPrice: data.discountPrice,
-      quantity: data.quantity || 1
+      description: data.description,
+      category: data.category,
+      image: data.image,
+      rating: { rate: data.rating.rate, count: data.rating.count },
+      quantity: 1
     };
 
     dispatch(toggleWhitelist(product));
   };
 
-  const { id, name, price, image, discountPrice } = data;
+  const { id, title, price, image, description, category, rating } = data;
 
   const handleProductClick = () => {
     // Navigate to the product details page using product id
@@ -62,12 +66,14 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
     const uniqueId = getProductUniqueId(id.toString(), cartItems);
 
     const cartItem = {
-      quantity: 1,
       id: id,
-      name: name,
+      title: title,
       price: price,
-      discountPrice: discountPrice,
-      image: image
+      description: description,
+      category: category,
+      image: image,
+      rating: { rate: rating.rate, count: rating.count },
+      quantity: 1
     };
     dispatch(addToCart(cartItem));
   };
@@ -106,7 +112,7 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
         {loading ? (
           <Skeleton variant="rectangular" height={340} />
         ) : (
-          <CardMedia component="img" height="340" image={image} alt={name} />
+          <CardMedia component="img" height="340" image={image} alt={title} />
         )}
         {loading ? (
           <Skeleton
@@ -155,7 +161,8 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
                   pb: 0.3
                 }}
               >
-                {name}
+                {title.slice(0, 30)}
+                {title.length > 30 && '...'}
               </Typography>
               <Box
                 sx={{
@@ -168,17 +175,8 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
                 <Typography
                   color="primary"
                   sx={{
-                    fontSize: '1.2rem',
-                    fontWeight: 700
-                  }}
-                >
-                  $ {discountPrice}
-                </Typography>
-                <Typography
-                  color="gray"
-                  sx={{
-                    fontSize: '.75rem',
-                    textDecoration: 'line-through'
+                    fontSize: '1.1rem'
+                    // textDecoration: 'line-through'
                   }}
                 >
                   $ {price}

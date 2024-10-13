@@ -49,11 +49,13 @@ const FavoriteItems = () => {
   const handleWhitelistToggle = (product: IProduct) => {
     const item = {
       id: product.id,
-      name: product.name,
-      image: product.image,
+      title: product.title,
       price: product.price,
-      discountPrice: product.discountPrice,
-      quantity: product.quantity || 1
+      description: product.description,
+      category: product.category,
+      image: product.image,
+      rating: { rate: product.rating.rate, count: product.rating.count },
+      quantity: 1
     };
 
     dispatch(toggleWhitelist(item));

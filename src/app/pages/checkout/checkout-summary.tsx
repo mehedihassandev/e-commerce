@@ -18,7 +18,7 @@ export const CheckoutSummary = () => {
   );
 
   const subTotal = cartItems.reduce((acc, item) => {
-    const price = parseFloat(item.discountPrice.replace('$', '').trim());
+    const price = item.price || 0;
 
     return acc + price * item.quantity;
   }, 0);
@@ -65,7 +65,7 @@ export const CheckoutSummary = () => {
                 component="img"
                 sx={{ width: 100, borderRadius: 2 }}
                 image={item.image}
-                alt={item.name}
+                alt={item.title}
               />
             </Box>
 
@@ -84,7 +84,7 @@ export const CheckoutSummary = () => {
                   fontWeight: 700
                 }}
               >
-                {item.name}
+                {item.title}
               </Typography>
               <Typography
                 variant="body2"
@@ -92,7 +92,7 @@ export const CheckoutSummary = () => {
                   fontWeight: 700
                 }}
               >
-                $ {item.discountPrice}
+                $ {item.price}
               </Typography>
             </CardContent>
           </Card>

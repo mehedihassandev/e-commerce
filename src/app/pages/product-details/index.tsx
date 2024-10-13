@@ -53,10 +53,15 @@ const ProductDetails = () => {
     const cartItem = {
       quantity: 1,
       id: product?.id || 0,
-      name: product?.name || '',
-      price: product?.price || '',
-      discountPrice: product?.discountPrice || '',
-      image: product?.image || ''
+      title: product?.title || '',
+      price: product?.price || 0,
+      description: product?.description || '',
+      category: product?.category || '',
+      image: product?.image || '',
+      rating: {
+        rate: product?.rating.rate || 0,
+        count: product?.rating.count || 0
+      }
     };
 
     // const existingItem = cartItems.find(
@@ -84,11 +89,13 @@ const ProductDetails = () => {
   const handleWhitelistToggle = () => {
     const whiteListItem = {
       id: product.id,
-      name: product.name,
-      image: product.image,
+      title: product.title,
       price: product.price,
-      discountPrice: product.discountPrice,
-      quantity: product.quantity || 1
+      description: product.description,
+      category: product.category,
+      image: product.image,
+      rating: { rate: product.rating.rate, count: product.rating.count },
+      quantity: 1
     };
 
     dispatch(toggleWhitelist(whiteListItem));
@@ -131,7 +138,7 @@ const ProductDetails = () => {
                 fontWeight: 600
               }}
             >
-              {product.name}
+              {product.title}
             </Typography>
             <Divider sx={{ mb: 2 }} />
             <Box
@@ -182,9 +189,9 @@ const ProductDetails = () => {
                     color: theme.palette.primary.main
                   }}
                 >
-                  $ {product.discountPrice}
+                  $ {product.price}
                 </Typography>
-                <Typography
+                {/* <Typography
                   color="text.secondary"
                   sx={{
                     fontSize: '.85rem',
@@ -192,7 +199,7 @@ const ProductDetails = () => {
                   }}
                 >
                   $ {product.price}
-                </Typography>
+                </Typography> */}
               </Box>
               <Typography>Ex Tax: $20.00</Typography>
             </Box>
@@ -224,8 +231,8 @@ const ProductDetails = () => {
                   justifyContent: 'space-between'
                 }}
               >
-                <Typography variant="body2">Product Code:</Typography>
-                <Typography variant="body2">1</Typography>
+                <Typography variant="body2">Category :</Typography>
+                <Typography variant="body2">{product.category}</Typography>
               </Box>
               <Box
                 sx={{
