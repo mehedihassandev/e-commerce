@@ -1,4 +1,4 @@
-import { AddShoppingCart, Delete, Star } from '@mui/icons-material';
+import { AddShoppingCart, Delete } from '@mui/icons-material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import {
   Box,
@@ -8,6 +8,7 @@ import {
   CardMedia,
   Divider,
   Grid,
+  Rating,
   Tab,
   Typography,
   useTheme
@@ -17,7 +18,6 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card';
-import { getProductUniqueId } from '../../helper/cart-helper';
 import { addToCart, toggleWhitelist } from '../../redux';
 import { RootState } from '../../redux/store';
 import { ContentWrapper, RhfTextField } from '../../utils/src';
@@ -40,7 +40,9 @@ const ProductDetails = () => {
   );
 
   const relatedProducts = useSelector((state: RootState) =>
-    state.productReducer.products.filter((p) => p.id !== parseInt(id || '', 10))
+    state.productReducer.products
+      .filter((p) => p.id !== parseInt(id || '', 10))
+      .slice(0, 4)
   );
 
   const whitelistItems = useSelector(
@@ -48,15 +50,18 @@ const ProductDetails = () => {
   );
 
   const handleAddToCart = () => {
-    const uniqueId = getProductUniqueId(id, cartItems);
-
     const cartItem = {
       quantity: 1,
       id: product?.id || 0,
-      name: product?.name || '',
-      price: product?.price || '',
-      discountPrice: product?.discountPrice || '',
-      image: product?.image || ''
+      title: product?.title || '',
+      price: product?.price || 0,
+      description: product?.description || '',
+      category: product?.category || '',
+      image: product?.image || '',
+      rating: {
+        rate: product?.rating.rate || 0,
+        count: product?.rating.count || 0
+      }
     };
 
     // const existingItem = cartItems.find(
@@ -84,11 +89,13 @@ const ProductDetails = () => {
   const handleWhitelistToggle = () => {
     const whiteListItem = {
       id: product.id,
-      name: product.name,
-      image: product.image,
+      title: product.title,
       price: product.price,
-      discountPrice: product.discountPrice,
-      quantity: product.quantity || 1
+      description: product.description,
+      category: product.category,
+      image: product.image,
+      rating: { rate: product.rating.rate, count: product.rating.count },
+      quantity: 1
     };
 
     dispatch(toggleWhitelist(whiteListItem));
@@ -114,6 +121,7 @@ const ProductDetails = () => {
               height="400"
               image={product.image}
               alt="Product Image"
+              sx={{ objectFit: 'contain', p: 2 }}
             />
           </Card>
         </Grid>
@@ -131,7 +139,7 @@ const ProductDetails = () => {
                 fontWeight: 600
               }}
             >
-              {product.name}
+              {product.title}
             </Typography>
             <Divider sx={{ mb: 2 }} />
             <Box
@@ -145,18 +153,22 @@ const ProductDetails = () => {
               <Box
                 sx={{
                   display: 'flex',
-                  gap: 2,
-                  alignItems: 'center'
+                  gap: 1,
+                  alignItems: 'flex-start'
                 }}
               >
-                <Star />
-                <Star />
-                <Star />
-                <Star />
-                <Star />
+                <Rating
+                  value={product.rating.rate}
+                  precision={0.5}
+                  readOnly
+                  sx={{
+                    color: theme.palette.primary.main
+                  }}
+                />
+                <Typography>({product.rating.count})</Typography>
               </Box>
               <Divider orientation="vertical" flexItem />
-              <Typography>0 Review</Typography>
+              <Typography>{product?.rating?.count} Review</Typography>
               <Divider orientation="vertical" flexItem />
               <Typography>Write a review</Typography>
             </Box>
@@ -182,19 +194,9 @@ const ProductDetails = () => {
                     color: theme.palette.primary.main
                   }}
                 >
-                  $ {product.discountPrice}
-                </Typography>
-                <Typography
-                  color="text.secondary"
-                  sx={{
-                    fontSize: '.85rem',
-                    textDecoration: 'line-through'
-                  }}
-                >
-                  $ {product.price}
+                  $ {product.price.toFixed(2)}
                 </Typography>
               </Box>
-              <Typography>Ex Tax: $20.00</Typography>
             </Box>
 
             <Divider sx={{ mb: 2 }} />
@@ -224,8 +226,8 @@ const ProductDetails = () => {
                   justifyContent: 'space-between'
                 }}
               >
-                <Typography variant="body2">Product Code:</Typography>
-                <Typography variant="body2">1</Typography>
+                <Typography variant="body2">Category :</Typography>
+                <Typography variant="body2">{product.category}</Typography>
               </Box>
               <Box
                 sx={{
@@ -351,15 +353,11 @@ const ProductDetails = () => {
           </Box>
         </Grid>
       </Grid>
-      <Typography variant="h5" sx={{ mt: 8, mb: 2, fontWeight: 700 }}>
+      <Typography variant="h5" sx={{ mt: 8, mb: 4, fontWeight: 700 }}>
         Related Products
       </Typography>
-      <Grid container spacing={4}>
-        {relatedProducts.slice(0, 4).map((relatedProduct) => (
-          <Grid item xs={12} sm={6} md={3} key={relatedProduct.id}>
-            <ProductCard data={relatedProduct} />
-          </Grid>
-        ))}
+      <Grid container spacing={2}>
+        <ProductCard data={relatedProducts} />
       </Grid>
     </ContentWrapper>
   );

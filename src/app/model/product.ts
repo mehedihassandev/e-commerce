@@ -1,9 +1,14 @@
+interface IRating {
+  rate: number;
+  count: number;
+}
 export interface IProduct {
   id: number;
-  name: string;
-  price: string;
-  discountPrice: string;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
   image: string;
-  description?: string;
-  quantity?: number;
+  rating: IRating;
+  quantity: number;
 }

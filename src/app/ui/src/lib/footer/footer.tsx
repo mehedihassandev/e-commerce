@@ -110,8 +110,8 @@ export const Footer = () => {
       </Grid>
 
       {/* Footer Bottom */}
-      <Box sx={{ textAlign: 'center', mt: 7 }}>
-        <Box
+      <Box sx={{ textAlign: 'center', mt: 5 }}>
+        {/*  <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
@@ -140,7 +140,7 @@ export const Footer = () => {
           <Typography variant="body2">Natural</Typography>
           <Typography variant="body2">|</Typography>
           <Typography variant="body2">Emergent Plants</Typography>
-        </Box>
+        </Box> */}
         <Typography variant="caption" display="block" sx={{ mt: 2 }}>
           Powered By
           <Typography

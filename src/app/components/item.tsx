@@ -42,10 +42,12 @@ export const Item: FC<IItemProps> = ({
           updateCartItem({
             id: item.id,
             quantity: updatedQuantity,
-            name: item.name,
+            title: item.title,
             price: item.price,
-            discountPrice: item.discountPrice,
-            image: item.image
+            description: item.description,
+            category: item.category,
+            image: item.image,
+            rating: { rate: item.rating.rate, count: item.rating.count }
           })
         );
       }
@@ -59,10 +61,12 @@ export const Item: FC<IItemProps> = ({
         updateCartItem({
           id: item.id,
           quantity: updatedQuantity,
-          name: item.name,
+          title: item.title,
           price: item.price,
-          discountPrice: item.discountPrice,
-          image: item.image
+          description: item.description,
+          category: item.category,
+          image: item.image,
+          rating: { rate: item.rating.rate, count: item.rating.count }
         })
       );
     }
@@ -85,13 +89,14 @@ export const Item: FC<IItemProps> = ({
       <Grid item xs={3}>
         <img
           src={item.image}
-          alt={item.name}
+          alt={item.title}
           style={{
             marginRight: '8px',
             width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            borderRadius: '4px'
+            height: '200px',
+            objectFit: 'contain',
+            borderRadius: '4px',
+            padding: '8px'
           }}
         />
       </Grid>
@@ -119,7 +124,7 @@ export const Item: FC<IItemProps> = ({
                 justifyContent: 'space-between'
               }}
             >
-              <Typography variant="h6">{item.name}</Typography>
+              <Typography variant="h6">{item.title}</Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <IconButton onClick={handleDecrement} size="small">
                   -
@@ -131,7 +136,7 @@ export const Item: FC<IItemProps> = ({
               </Box>
             </Box>
           ) : (
-            <Typography variant="h6">{item.name}</Typography>
+            <Typography variant="h6">{item.title}</Typography>
           )}
           <Typography variant="body2">Color: Black</Typography>
           <Typography variant="body2">Quantity: {item.quantity}</Typography>
@@ -185,7 +190,7 @@ export const Item: FC<IItemProps> = ({
                 : 'Add To Whitelist'}
             </Button>
           </Box>
-          <Typography variant="body1">$ {item.price}</Typography>
+          <Typography variant="body1">$ {item.price.toFixed(2)}</Typography>
         </Box>
       </Grid>
     </Grid>

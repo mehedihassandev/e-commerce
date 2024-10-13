@@ -1,8 +1,10 @@
 export interface IWhitelistItem {
   id: number;
-  name: string;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
   image: string;
-  price: string;
-  discountPrice: string;
+  rating: { rate: number; count: number };
   quantity: number;
 }

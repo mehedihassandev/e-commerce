@@ -1,8 +1,14 @@
+interface IRating {
+  rate: number;
+  count: number;
+}
 export interface ICartItem {
   id: number;
-  name: string;
-  price: string;
-  discountPrice: string;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
   image: string;
+  rating: IRating;
   quantity: number;
 }

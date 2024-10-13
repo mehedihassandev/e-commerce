@@ -1,8 +1,8 @@
-import { Box, Grid, Stack } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Item } from '../../components/item';
-import { RelatedProduct } from '../../components/related-product';
+import { ProductCard } from '../../components/product-card';
 import { IProduct } from '../../model/product';
 import { removeFromCart, toggleWhitelist } from '../../redux';
 import { RootState } from '../../redux/store';
@@ -23,10 +23,7 @@ const FavoriteItems = () => {
   const relatedProducts = useSelector((state: RootState) =>
     state.productReducer.products
       .filter((p) => p.id !== parseInt(id || '', 10))
-      .map((product) => ({
-        ...product,
-        quantity: 0 // Add a default quantity value
-      }))
+      .slice(0, 4)
   );
 
   const handleRemoveFromCart = (itemId: number) => {
@@ -49,11 +46,13 @@ const FavoriteItems = () => {
   const handleWhitelistToggle = (product: IProduct) => {
     const item = {
       id: product.id,
-      name: product.name,
-      image: product.image,
+      title: product.title,
       price: product.price,
-      discountPrice: product.discountPrice,
-      quantity: product.quantity || 1
+      description: product.description,
+      category: product.category,
+      image: product.image,
+      rating: { rate: product.rating.rate, count: product.rating.count },
+      quantity: 1
     };
 
     dispatch(toggleWhitelist(item));
@@ -88,7 +87,12 @@ const FavoriteItems = () => {
             )}
           </Grid>
         </Grid>
-        <RelatedProduct relatedProducts={relatedProducts} />
+        <Typography variant="h5" sx={{ mt: 8, mb: 4, fontWeight: 700 }}>
+          Related Products
+        </Typography>
+        <Grid container spacing={2}>
+          <ProductCard data={relatedProducts} />
+        </Grid>
       </Stack>
     </ContentWrapper>
   );
