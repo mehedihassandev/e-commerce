@@ -18,9 +18,9 @@ const Cart = () => {
     (state: RootState) => state.cartReducer.cartItems
   );
 
-  const whitelistItems = useSelector(
-    (state: RootState) => state.whitelistReducer.whitelistedProducts
-  );
+  // const whitelistItems = useSelector(
+  //   (state: RootState) => state.whitelistReducer.whitelistedProducts
+  // );
 
   const relatedProducts = useSelector((state: RootState) =>
     state.productReducer.products
@@ -87,6 +87,7 @@ const Cart = () => {
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
                 <Item
+                  key={item.id}
                   item={item}
                   handleRemoveFromCart={handleRemoveFromCart}
                   handleWhitelistToggle={handleWhitelistToggle}
