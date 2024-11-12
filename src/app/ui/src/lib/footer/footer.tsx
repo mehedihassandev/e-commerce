@@ -1,10 +1,8 @@
 import { Facebook, Instagram, Pinterest, Twitter } from '@mui/icons-material';
-import { Box, Grid, IconButton, Typography, useTheme } from '@mui/material';
+import { Box, Grid, IconButton, Typography } from '@mui/material';
 import { ContentWrapper } from '../../../../utils/src';
 
 export const Footer = () => {
-  const theme = useTheme();
-
   return (
     <ContentWrapper
       sx={{

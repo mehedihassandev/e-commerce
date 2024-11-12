@@ -35,6 +35,7 @@ export const NetworkDetector: FC<{ children: ReactNode }> = ({ children }) => {
 
 export default NetworkDetector;
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useNetworkDetector = () => {
   const network = useContext(Context);
 

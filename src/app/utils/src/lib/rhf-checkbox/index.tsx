@@ -23,6 +23,7 @@ export const RhfCheckbox = <T extends FieldValues>({
     <Controller
       control={control}
       {...props}
+      // eslint-disable-next-line unused-imports/no-unused-vars
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <FormControlLabel
           control={

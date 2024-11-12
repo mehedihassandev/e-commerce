@@ -19,7 +19,7 @@ import RhfCheckbox from '../../utils/src/lib/rhf-checkbox';
 import RhfRadio from '../../utils/src/lib/rhf-radio';
 
 export const CheckoutForm = () => {
-  const { handleSubmit, control } = useForm();
+  const { control } = useForm();
 
   return (
     <Stack

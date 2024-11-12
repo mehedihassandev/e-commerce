@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { Typography, useTheme } from '@mui/material';
+import { FC } from 'react';
 
 import styles from './sim-loader.module.scss';
 

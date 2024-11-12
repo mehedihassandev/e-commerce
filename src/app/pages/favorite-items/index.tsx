@@ -12,10 +12,6 @@ const FavoriteItems = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
 
-  const cartItems = useSelector(
-    (state: RootState) => state.cartReducer.cartItems
-  );
-
   const whitelistItems = useSelector(
     (state: RootState) => state.whitelistReducer.whitelistedProducts
   );
@@ -32,19 +28,6 @@ const FavoriteItems = () => {
   const handleRemoveFromCart = (itemId: number) => {
     dispatch(removeFromCart({ cartItemId: itemId }));
   };
-
-  // const handleAddToCart = (product: IProduct) => {
-  //   const uniqueId = getProductUniqueId(product.id.toString(), cartItems);
-
-  //   const cartItem = {
-  //     quantity: 1,
-  //     id: product.id,
-  //     name: product.name,
-  //     price: product.price,
-  //     image: product.image
-  //   };
-  //   dispatch(addToCart(cartItem));
-  // };
 
   const handleWhitelistToggle = (product: IProduct) => {
     const item = {
@@ -79,7 +62,6 @@ const FavoriteItems = () => {
                   key={item.id}
                   item={item}
                   handleRemoveFromCart={handleRemoveFromCart}
-                  // handleAddToCart={handleAddToCart}
                   handleWhitelistToggle={handleWhitelistToggle}
                 />
               ))

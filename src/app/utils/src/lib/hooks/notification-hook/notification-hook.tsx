@@ -14,6 +14,7 @@ const NotificationContext = createContext<NotificationContextType | undefined>(
   undefined
 );
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useNotification = (): NotificationContextType => {
   const context = useContext(NotificationContext);
   if (!context) {

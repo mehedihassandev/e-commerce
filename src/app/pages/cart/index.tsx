@@ -18,10 +18,6 @@ const Cart = () => {
     (state: RootState) => state.cartReducer.cartItems
   );
 
-  const whitelistItems = useSelector(
-    (state: RootState) => state.whitelistReducer.whitelistedProducts
-  );
-
   const relatedProducts = useSelector((state: RootState) =>
     state.productReducer.products
       .filter((p) => p.id !== parseInt(id || '', 10))
@@ -43,19 +39,6 @@ const Cart = () => {
   const handleRemoveFromCart = (itemId: number) => {
     dispatch(removeFromCart({ cartItemId: itemId }));
   };
-
-  // const handleAddToCart = (product: IProduct) => {
-  //   const uniqueId = getProductUniqueId(id, cartItems);
-
-  //   const cartItem = {
-  //     quantity: 1,
-  //     id: product.id,
-  //     name: product.name,
-  //     price: product.price,
-  //     image: product.image
-  //   };
-  //   dispatch(addToCart(cartItem));
-  // };
 
   const handleWhitelistToggle = (product: IProduct) => {
     const item = {
@@ -90,7 +73,6 @@ const Cart = () => {
                   item={item}
                   handleRemoveFromCart={handleRemoveFromCart}
                   handleWhitelistToggle={handleWhitelistToggle}
-                  // handleAddToCart={handleAddToCart}
                 />
               ))
             ) : (

@@ -6,8 +6,8 @@ const API_URL = {
     'https://Faker-API.proxy-production.allthingsdev.co/api/v1/companies'
 };
 
-export async function getProduct<R = any, D = any>(
-  requestParamsOptions: IRequestParamsOptions<D>
+export async function getProduct<R = any>(
+  requestParamsOptions: IRequestParamsOptions
 ): Promise<AxiosResponse<R>> {
   const { api, url, headers } = requestParamsOptions;
 
