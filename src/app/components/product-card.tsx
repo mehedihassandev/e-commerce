@@ -6,14 +6,12 @@ import {
   CardMedia,
   Grid,
   IconButton,
-  Skeleton,
   Typography,
   useTheme
 } from '@mui/material';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getProductUniqueId } from '../helper/cart-helper';
 import { IProduct } from '../model/product';
 import { addToCart, toggleWhitelist } from '../redux';
 import { RootState } from '../redux/store';
@@ -59,8 +57,6 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
   };
 
   const handleAddToCart = () => {
-    const uniqueId = getProductUniqueId(id.toString(), cartItems);
-
     const cartItem = {
       quantity: 1,
       id: id,
@@ -71,15 +67,6 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
     };
     dispatch(addToCart(cartItem));
   };
-
-  useEffect(() => {
-    // Simulate loading delay
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <Card
@@ -103,111 +90,92 @@ export const ProductCard: FC<IProductCardProps> = ({ data }) => {
       onClick={handleProductClick}
     >
       <Box sx={{ position: 'relative' }}>
-        {loading ? (
-          <Skeleton variant="rectangular" height={340} />
-        ) : (
-          <CardMedia component="img" height="340" image={image} alt={name} />
-        )}
-        {loading ? (
-          <Skeleton
-            variant="circular"
-            width={40}
-            height={40}
-            sx={{ position: 'absolute', top: 10, right: 10 }}
-          />
-        ) : (
-          <IconButton
-            className="favorite-icon"
-            sx={{
-              position: 'absolute',
-              top: 8,
-              right: 8,
-              color: isWhitelisted
-                ? theme.palette.primary.main
-                : theme.palette.grey[500],
-              opacity: isWhitelisted ? 1 : 0,
-              transition: 'opacity 0.3s'
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleWhitelistToggle();
-            }}
-          >
-            <Favorite />
-          </IconButton>
-        )}
+        <CardMedia component="img" height="340" image={image} alt={name} />
+
+        <IconButton
+          className="favorite-icon"
+          sx={{
+            position: 'absolute',
+            top: 8,
+            right: 8,
+            color: isWhitelisted
+              ? theme.palette.primary.main
+              : theme.palette.grey[500],
+            opacity: isWhitelisted ? 1 : 0,
+            transition: 'opacity 0.3s'
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleWhitelistToggle();
+          }}
+        >
+          <Favorite />
+        </IconButton>
       </Box>
       <CardContent>
-        {loading ? (
-          <>
-            <Skeleton width="80%" />
-            <Skeleton width="60%" />
-          </>
-        ) : (
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Typography
+              sx={{
+                color: 'black',
+                fontWeight: 600,
+                fontSize: 18,
+                lineHeight: 1.5,
+                pb: 0.3
+              }}
+            >
+              {name}
+            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                alignItems: 'end',
+                mt: 2
+              }}
+            >
               <Typography
+                color="primary"
                 sx={{
-                  color: 'black',
-                  fontWeight: 600,
-                  fontSize: 18,
-                  lineHeight: 1.5,
-                  pb: 0.3
+                  fontSize: '1.2rem',
+                  fontWeight: 700
                 }}
               >
-                {name}
+                $ {discountPrice}
               </Typography>
-              <Box
+              <Typography
+                color="gray"
                 sx={{
-                  display: 'flex',
-                  gap: 2,
-                  alignItems: 'end',
-                  mt: 2
+                  fontSize: '.75rem',
+                  textDecoration: 'line-through'
                 }}
               >
-                <Typography
-                  color="primary"
-                  sx={{
-                    fontSize: '1.2rem',
-                    fontWeight: 700
-                  }}
-                >
-                  $ {discountPrice}
-                </Typography>
-                <Typography
-                  color="gray"
-                  sx={{
-                    fontSize: '.75rem',
-                    textDecoration: 'line-through'
-                  }}
-                >
-                  $ {price}
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={6}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  alignItems: 'center',
-                  height: '100%'
-                }}
-              >
-                <IconButton
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAddToCart();
-                  }}
-                  color="primary"
-                  disabled={cartItems.some((item) => item.id === id)}
-                >
-                  <ShoppingCart />
-                </IconButton>
-              </Box>
-            </Grid>
+                $ {price}
+              </Typography>
+            </Box>
           </Grid>
-        )}
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                height: '100%'
+              }}
+            >
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddToCart();
+                }}
+                color="primary"
+                disabled={cartItems.some((item) => item.id === id)}
+              >
+                <ShoppingCart />
+              </IconButton>
+            </Box>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
