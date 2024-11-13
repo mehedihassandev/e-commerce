@@ -86,7 +86,13 @@ const ProductDetails = () => {
       sx={{
         backgroundColor: 'transparent',
         mb: 3,
-        mt: 10
+        mt: 10,
+        px: {
+          xs: 2,
+          sm: 4,
+          md: 6,
+          lg: 10
+        }
       }}
     >
       <Grid container spacing={8}>

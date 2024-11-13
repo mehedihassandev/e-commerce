@@ -1,9 +1,8 @@
-import { ExpandMore, Favorite, Menu, ShoppingCart } from '@mui/icons-material';
+import { Favorite, Menu, ShoppingCart } from '@mui/icons-material';
 import {
   AppBar,
   Badge,
   Box,
-  Button,
   Drawer,
   IconButton,
   InputBase,
@@ -43,7 +42,7 @@ export const Header = () => {
   return (
     <AppBar position="fixed">
       {/* Top green bar */}
-      <Box
+      {/* <Box
         sx={{
           backgroundColor: theme.palette.primary.main,
           color: 'white',
@@ -53,7 +52,7 @@ export const Header = () => {
           padding: '2px 10px'
         }}
       >
-        {/* <Toolbar sx={{ justifyContent: 'space-between' }} > */}
+        <Toolbar sx={{ justifyContent: 'space-between' }} >
         <Typography>+1234567890</Typography>
         <Typography variant="body2">Welcome To Our Online Store!</Typography>
         <Box>
@@ -70,13 +69,19 @@ export const Header = () => {
             English <ExpandMore />
           </Button>
         </Box>
-        {/* </Toolbar> */}
-      </Box>
+        </Toolbar>
+      </Box> */}
       <ContentWrapper
         sx={{
           backgroundColor: 'white',
           color: 'black',
-          boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)'
+          boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
+          px: {
+            xs: 2,
+            sm: 4,
+            md: 6,
+            lg: 10
+          }
         }}
       >
         <Toolbar disableGutters>

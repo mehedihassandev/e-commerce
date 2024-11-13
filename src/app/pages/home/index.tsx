@@ -18,7 +18,17 @@ export const Home = () => {
   }, [dispatch]);
 
   return (
-    <ContentWrapper>
+    <ContentWrapper
+      sx={{
+        backgroundColor: 'transparent',
+        px: {
+          xs: 2,
+          sm: 4,
+          md: 6,
+          lg: 10
+        }
+      }}
+    >
       <Hero />
       <Product />
       <Feature />

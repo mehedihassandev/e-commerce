@@ -57,7 +57,13 @@ const Cart = () => {
     <ContentWrapper
       sx={{
         backgroundColor: 'transparent',
-        my: 3
+        my: 3,
+        px: {
+          xs: 2,
+          sm: 4,
+          md: 6,
+          lg: 10
+        }
       }}
     >
       <Stack
@@ -66,7 +72,7 @@ const Cart = () => {
         }}
       >
         <Grid container spacing={4}>
-          <Grid item xs={8}>
+          <Grid item xs={12} md={8}>
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
                 <Item
@@ -79,7 +85,7 @@ const Cart = () => {
               <Box sx={{ textAlign: 'center' }}>No items in cart</Box>
             )}
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md={8}>
             <Grid container spacing={2}>
               <Grid
                 item

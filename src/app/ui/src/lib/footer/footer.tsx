@@ -12,7 +12,13 @@ export const Footer = () => {
         backgroundPosition: 'center', // Center the image
         color: '#fff',
         paddingTop: 6,
-        paddingBottom: 6
+        paddingBottom: 6,
+        px: {
+          xs: 2,
+          sm: 4,
+          md: 6,
+          lg: 10
+        }
       }}
     >
       <Grid container spacing={4}>
@@ -109,7 +115,7 @@ export const Footer = () => {
 
       {/* Footer Bottom */}
       <Box sx={{ textAlign: 'center', mt: 7 }}>
-        <Box
+        {/* <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
@@ -138,9 +144,9 @@ export const Footer = () => {
           <Typography variant="body2">Natural</Typography>
           <Typography variant="body2">|</Typography>
           <Typography variant="body2">Emergent Plants</Typography>
-        </Box>
+        </Box> */}
         <Typography variant="caption" display="block" sx={{ mt: 2 }}>
-          Powered By
+          Developed by{' '}
           <Typography
             component="a"
             href="https://www.mehedihassan.me/"

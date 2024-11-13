@@ -46,7 +46,13 @@ const FavoriteItems = () => {
     <ContentWrapper
       sx={{
         backgroundColor: 'transparent',
-        my: 3
+        my: 3,
+        px: {
+          xs: 2,
+          sm: 4,
+          md: 6,
+          lg: 10
+        }
       }}
     >
       <Stack
