@@ -9,6 +9,7 @@ import {
   Divider,
   Grid,
   Tab,
+  TextField,
   Typography,
   useTheme
 } from '@mui/material';
@@ -19,7 +20,7 @@ import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card';
 import { addToCart, toggleWhitelist } from '../../redux';
 import { RootState } from '../../redux/store';
-import { ContentWrapper, RhfTextField } from '../../utils/src';
+import { ContentWrapper } from '../../utils/src';
 
 const ProductDetails = () => {
   const theme = useTheme();
@@ -298,8 +299,7 @@ const ProductDetails = () => {
                       gap: 2
                     }}
                   >
-                    <RhfTextField
-                      control={control}
+                    <TextField
                       name="name"
                       placeholder="Enter Your Name"
                       fullWidth
@@ -307,8 +307,7 @@ const ProductDetails = () => {
                       size="medium"
                     />
 
-                    <RhfTextField
-                      control={control}
+                    <TextField
                       name="name"
                       placeholder="Enter Your Review"
                       fullWidth

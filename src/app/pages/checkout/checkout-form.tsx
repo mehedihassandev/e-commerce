@@ -7,6 +7,7 @@ import {
   IconButton,
   InputAdornment,
   Stack,
+  TextField,
   Typography
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
@@ -14,7 +15,7 @@ import {
   countryOptions,
   paymentMethodsOption
 } from '../../constants/cart-constant';
-import { RhfSelect, RhfTextField } from '../../utils/src';
+import { RhfSelect } from '../../utils/src';
 import RhfCheckbox from '../../utils/src/lib/rhf-checkbox';
 import RhfRadio from '../../utils/src/lib/rhf-radio';
 
@@ -57,30 +58,21 @@ export const CheckoutForm = () => {
             gap: 2
           }}
         >
-          <RhfTextField
-            control={control}
+          <TextField
             name="firstName"
             label="First Name"
             size="medium"
             fullWidth
           />
-          <RhfTextField
-            control={control}
+          <TextField
             name="lastName"
             label="Last Name"
             size="medium"
             fullWidth
           />
         </Box>
-        <RhfTextField
-          control={control}
-          name="address"
-          label="Address"
-          size="medium"
-          fullWidth
-        />
-        <RhfTextField
-          control={control}
+        <TextField name="address" label="Address" size="medium" fullWidth />
+        <TextField
           name="addressDetails"
           label="Apartment, suite, etc. (Optional)"
           size="medium"
@@ -92,15 +84,8 @@ export const CheckoutForm = () => {
             gap: 2
           }}
         >
-          <RhfTextField
-            control={control}
-            name="city"
-            label="City"
-            size="medium"
-            fullWidth
-          />
-          <RhfTextField
-            control={control}
+          <TextField name="city" label="City" size="medium" fullWidth />
+          <TextField
             name="postalCode"
             label="Postal Code"
             size="medium"
@@ -193,11 +178,11 @@ export const CheckoutForm = () => {
 
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <RhfTextField
-                  control={control}
+                <TextField
                   name="cardNumber"
                   label="Card number"
                   fullWidth
+                  size="medium"
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -205,13 +190,11 @@ export const CheckoutForm = () => {
                       </InputAdornment>
                     )
                   }}
-                  size="medium"
                 />
               </Grid>
 
               <Grid item xs={6}>
-                <RhfTextField
-                  control={control}
+                <TextField
                   name="expireDate"
                   label="Expiration date (MM / YY)"
                   fullWidth
@@ -220,8 +203,7 @@ export const CheckoutForm = () => {
               </Grid>
 
               <Grid item xs={6}>
-                <RhfTextField
-                  control={control}
+                <TextField
                   name="code"
                   label="Security code"
                   size="medium"
@@ -237,8 +219,7 @@ export const CheckoutForm = () => {
               </Grid>
 
               <Grid item xs={12}>
-                <RhfTextField
-                  control={control}
+                <TextField
                   name="nameOfCard"
                   label="Name on card"
                   fullWidth

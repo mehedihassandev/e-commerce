@@ -1,18 +1,9 @@
 import { Box } from '@mui/material';
-import NProgress from 'nprogress';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
 import Loader from '../loader/loader';
 
 export const SuspenseLoader: FC = () => {
-  useEffect(() => {
-    NProgress.start();
-
-    return () => {
-      NProgress.done();
-    };
-  }, []);
-
   return (
     <Box
       sx={{
